@@ -1,8 +1,32 @@
 # Packages to install 4 FE
 
-tailwind
-react-router-dom
-jwt
-dotenv
+## tailwind
 
-to be continued...
+> npm install -D tailwindcss
+> npx tailwindcss init
+
+## bootstrap
+
+> npm install react-bootstrap
+
+## react-icons
+
+>
+
+## react-dom
+
+> npm i react-dom
+
+## react-router-dom
+
+> npm i react-router-dom
+
+## jwt
+
+> npm i jwt-decode
+
+## dotenv
+
+> npm i dotenv
+
+つづく...
