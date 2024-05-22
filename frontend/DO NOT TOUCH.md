@@ -11,7 +11,7 @@
 
 ## react-icons
 
->
+> npm i react-icons
 
 ## react-dom
 
