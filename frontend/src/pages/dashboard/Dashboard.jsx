@@ -8,7 +8,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/user", {
+        const response = await fetch("http://localhost:3001/api/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

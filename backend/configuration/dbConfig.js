@@ -7,11 +7,10 @@ dotenv.config();
 const MONGODB_PASS = process.env.MONGODB_PASS;
 const USER_NAME = process.env.USER_NAME;
 
-const uri = `mongodb+srv://${USER_NAME}:${MONGODB_PASS}@cluster0.vwco0cn.mongodb.net/final-project`;
-
+const url = process.env.MONGODB_URL;
 
 mongoose
-  .connect(uri)
+  .connect(url)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
