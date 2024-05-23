@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+/* import "bootstrap/dist/css/bootstrap.min.css"; */
 import Signup from "./pages/Signup.jsx";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
