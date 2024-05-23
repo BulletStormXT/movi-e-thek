@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Signup from "./pages/Signup.jsx";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import { LoginContext } from "./context/LoginContext";
+import { LoginContext } from "./context/LoginContext.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 
