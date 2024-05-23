@@ -1,0 +1,41 @@
+/*Signup*/
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 100vh;
+}
+
+.signup-form {
+  background-color: turquoise;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.signup-heading {
+  color: turquoise;
+}
+
+.error-message {
+  color: hotpink;
+}
+
+.input-field {
+  background-color: turquoise;
+}
+
+.register-button {
+  background-color: hotpink;
+}
+
+.login-link {
+  background-color: mint;
+}
+
+/*Login*/
+
+/*Profile*/
+
+/*Error*/
