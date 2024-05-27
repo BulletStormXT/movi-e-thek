@@ -8,6 +8,7 @@ const MONGODB_PASS = process.env.MONGODB_PASS;
 const USER_NAME = process.env.USER_NAME;
 
 const url = process.env.MONGODB_URL;
+const PORT = process.env.PORT;
 
 mongoose
   .connect(url)
