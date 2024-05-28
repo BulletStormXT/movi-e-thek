@@ -7,6 +7,7 @@ const loginRoute = require("./routes/login");
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/productRoutes");
 const cors = require("cors");
+const movieRoute = require("./routes/movieRoutes");
 const createAdminAccount = require("./scripts/admin");
 
 const app = express();
@@ -20,6 +21,7 @@ app.use("/user", signupRoute);
 app.use("/auth", loginRoute);
 app.use("/api", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/movies", movieRoute);
 
 const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => {
