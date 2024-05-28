@@ -5,4 +5,5 @@ async function getUsers(){
     return user;
 }
 
-module.exports = {getUsers}
+
+module.exports = { getUsers }
