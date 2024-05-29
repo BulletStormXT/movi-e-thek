@@ -35,7 +35,12 @@ async function fetchMoviesBySearch(search) {
   return await fetchFromOMDb({ s: search });
 }
 
+async function fetchMovieDetailsById(imdb_id) {
+  return await fetchFromOMDb({ i: imdb_id });
+}
+
 module.exports = {
   fetchMovieDetails,
   fetchMoviesBySearch,
+  fetchMovieDetailsById,
 };

@@ -24,4 +24,11 @@ describe("OMDb API Endpoints", () => {
     expect(res.body).toHaveProperty("Search");
     expect(res.body.Search.length).toBeGreaterThan(0);
   });
+
+  it("should fetch movie details by ID", async () => {
+    const imdbID = "tt1375666";
+    const res = await request(app).get(`/api/movies/movie/id/${imdbID}`); // Updated to match the new route
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty("imdbID", "tt1375666");
+  });
 });

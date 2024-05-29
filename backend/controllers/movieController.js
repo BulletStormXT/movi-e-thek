@@ -20,7 +20,18 @@ async function searchMovies(req, res) {
   }
 }
 
+async function getMovieDetailsById(req, res) {
+  try {
+    const imdb_id = req.params.imdb_id;
+    const movieDetails = await omdbService.fetchMovieDetailsById(imdb_id);
+    res.json(movieDetails);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getMovieDetails,
   searchMovies,
+  getMovieDetailsById,
 };
