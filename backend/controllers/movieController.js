@@ -12,13 +12,23 @@ async function getMovieDetails(req, res) {
 
 async function searchMovies(req, res) {
   try {
-    const search = req.query.q;
+    const search = req.params.search;
     const movies = await omdbService.fetchMoviesBySearch(search);
     res.json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 }
+
+// async function searchMovies(req, res) {
+//   try {
+//     const search = req.query.q;
+//     const movies = await omdbService.fetchMoviesBySearch(search);
+//     res.json(movies);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// }
 
 async function getMovieDetailsById(req, res) {
   try {

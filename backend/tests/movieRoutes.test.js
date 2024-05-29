@@ -19,11 +19,19 @@ describe("OMDb API Endpoints", () => {
 
   it("should search movies", async () => {
     const searchQuery = "Star Wars";
-    const res = await request(app).get(`/api/movies/search?q=${searchQuery}`); // Updated to match the new route
+    const res = await request(app).get(`/api/movies/search/${searchQuery}`);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("Search");
     expect(res.body.Search.length).toBeGreaterThan(0);
   });
+
+  // it("should search movies", async () => {
+  //   const searchQuery = "Star Wars";
+  //   const res = await request(app).get(`/api/movies/search?q=${searchQuery}`); // Updated to match the new route
+  //   expect(res.statusCode).toEqual(200);
+  //   expect(res.body).toHaveProperty("Search");
+  //   expect(res.body.Search.length).toBeGreaterThan(0);
+  // });
 
   it("should fetch movie details by ID", async () => {
     const imdbID = "tt1375666";
