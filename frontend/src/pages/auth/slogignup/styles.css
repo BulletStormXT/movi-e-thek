@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0d1b2a;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header select {
+  background-color: #1b263b;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+.form-container {
+  background-color: #1b263b;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  text-align: left;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+  font-weight: bold;
+  border-bottom: 2px solid #fff;
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+}
+
+.form.active {
+  display: flex;
+}
+
+form input {
+  background-color: #0d1b2a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+form a {
+  color: #adb5bd;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+  text-decoration: none;
+  align-self: flex-end;
+}
+
+form button {
+  background-color: #1b263b;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+form button:hover {
+  background-color: #415a77;
+}
+
+p {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+p a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
