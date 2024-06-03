@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import "./Sloginup.css";
 
 function showForm(formType) {
   const loginForm = document.getElementById("login-form");
@@ -31,7 +31,7 @@ function showForm(formType) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.createElement("div");
-  container.className = "container";
+  container.className = "container sloginup";
 
   const header = document.createElement("header");
   const title = document.createElement("h1");

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./signup.css";
+import Card from "react-bootstrap/Card";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -42,52 +44,66 @@ const Signup = () => {
 
   return (
     <React.Fragment>
-      <div className="text-center">
-        <h1>SignUp</h1>
-      </div>
-      <Container>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              name="name"
-              type="text"
-              placeholder="Enter name"
-              value={formData.name}
-              onChange={handleInputChange}
-            />
-            <Form.Text className="text-muted" />
-          </Form.Group>
+      <Card
+        style={{
+          width: "24rem",
+          height: "30rem",
+          margin: "40px auto",
+          backgroundColor: "skyblue",
+          color: "#0d1b2a",
+          borderRadius: "20px",
+        }}
+        className="cardShadow"
+      >
+        <Card.Body>
+          <div className="text-center">
+            <h1>SignUp</h1>
+          </div>
+          <Container>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  name="name"
+                  type="text"
+                  placeholder="Enter name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <Form.Text className="text-muted" />
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              name="email"
-              type="email"
-              placeholder="Enter email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Container>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Container>
+        </Card.Body>
+      </Card>
     </React.Fragment>
   );
 };

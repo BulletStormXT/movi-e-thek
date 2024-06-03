@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, CardBody } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,42 +43,67 @@ const Login = () => {
     console.log(formData);
   };
 
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+  };
+
+  //? später vielleicht noch Farben ändern! @BulletStormXT
+
   return (
     <React.Fragment>
-      <div className="text-center">
-        <h1>Login</h1>
-      </div>
-      <Container>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              name="email"
-              type="email"
-              placeholder="Enter email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+      <Card
+        style={{
+          width: "24rem",
+          height: "30rem",
+          margin: "40px auto",
+          backgroundColor: "skyblue",
+          color: "#0d1b2a",
+          borderRadius: "20px",
+        }}
+        className="cardShadow"
+      >
+        <Card.Body variant="dark">
+          <div className="text-center">
+            <h1>Login</h1>
+          </div>
+          <Container>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              name="password"
-              type="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Login
-          </Button>
-        </Form>
-      </Container>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Login
+              </Button>
+            </Form>
+            <div className="text-center mt-3">
+              <a href="#" onClick={handleForgotPassword}>
+                Forgot Password?
+              </a>
+            </div>
+          </Container>
+        </Card.Body>
+      </Card>
     </React.Fragment>
   );
 };
