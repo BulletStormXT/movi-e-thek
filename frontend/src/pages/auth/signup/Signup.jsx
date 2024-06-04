@@ -47,12 +47,12 @@ const Signup = () => {
         style={{
           width: "24rem",
           height: "30rem",
-          margin: "40px auto",
+          margin: "100px auto",
           backgroundColor: "skyblue",
           color: "#0d1b2a",
           borderRadius: "20px",
         }}
-        className="cardShadow"
+        className="cardLogin cardShadow"
       >
         <Card.Body>
           <div className="text-center">
@@ -96,7 +96,7 @@ const Signup = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="btnLogin">
                 Submit
               </Button>
             </Form>
