@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Finlandica&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Finlandica&display=swap");
 
 .App {
   text-align: center;
@@ -32,21 +32,32 @@
 
 body {
   margin: 0;
-  font-family: 'Finlandica', Arial, sans-serif;
-  background: linear-gradient(360deg, rgb(11, 0, 23) 0%, rgba(0,212,255,0) 100%),  linear-gradient(180deg, rgba(0, 255, 238, 0.252) 0%, rgba(0,55,82,0) 100%) !important;
+  font-family: "Finlandica", Arial, sans-serif;
+  background: linear-gradient(
+      360deg,
+      rgb(11, 0, 23) 0%,
+      rgba(0, 212, 255, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 255, 238, 0.252) 0%,
+      rgba(0, 55, 82, 0) 100%
+    ) !important;
   background-color: #0d1b2a !important;
   color: rgba(240, 248, 255, 0.411);
   color: #fff !important;
   height: 100vh;
 }
 
-.cardLogin{
-  background: linear-gradient(0deg, rgba(152, 150, 255, 0.05) 0%, rgba(0,55,82,0) 25%) !important;
+.cardLogin {
+  background: linear-gradient(
+    0deg,
+    rgba(152, 150, 255, 0.05) 0%,
+    rgba(0, 55, 82, 0) 25%
+  ) !important;
   background-color: #131439 !important;
   color: #c4ceda !important;
-  }
-
-  
+}
 
 /* 
 .sloginup {
@@ -124,34 +135,38 @@ header select {
 }
 
 form input {
-  background-color: #0d1b2a;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  background-color: #0d1b2a !important;
+  color: whitesmoke !important;
+  border: none !important;
+  padding: 10px !important;
+  margin-bottom: 10px !important;
+  border-radius: 5px !important;
 }
 
 form a {
-  color: #adb5bd;
-  font-size: 0.8rem;
-  margin-bottom: 20px;
-  text-decoration: none;
-  align-self: flex-end;
+  color: #adb5bd !important;
+  font-size: 0.8rem !important;
+  margin-bottom: 20px !important;
+  text-decoration: none !important;
+  align-self: flex-end !important;
+}
+
+form input::placeholder {
+  color: #535353 !important;
 }
 
 form button {
-  background-color: #1b263b;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
+  background-color: #1b263b !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
 }
 
 form button:hover {
-  background-color: #415a77;
+  background-color: #415a77 !important;
 }
 
 p {
@@ -196,20 +211,20 @@ a:active {
 
 .text-muted {
   color: #3e5787 !important;
-} 
+}
 
 .btnLogin {
-  background-color: #3e5787;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
+  background-color: #3e5787 !important;
+  color: #efefef !important;
+  border: none !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
 }
 
 .btnLogin:hover {
-  background-color: #293a76;
+  background-color: #293a76 !important;
 }
 
 .gotoSignup {
