@@ -27,12 +27,17 @@ const Login = () => {
       });
       const data = await response.json();
       console.log(data);
-    
 
       localStorage.setItem("token", data.token);
 
-      
-      navigate("/admin/dashboard");
+      // Check user role from the response (maybe PopUp)
+      if (data.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (data.role === "user") {
+        navigate("/user/dashboard");
+      } else {
+        console.log("Invalid User");
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -56,10 +61,10 @@ const Login = () => {
   //     });
   //     const data = await response.json();
   //     console.log(data);
-  
+
   //     localStorage.setItem("token", data.token);
   //     localStorage.setItem("role", data.role);
-  
+
   //     const admin = localStorage.getItem('role') === 'admin';
   //     if(admin) {
   //       navigate("/admin/dashboard");
@@ -127,18 +132,18 @@ const Login = () => {
                 />
               </Form.Group>
               <div className="text-center mt-3">
-              <a href="#" onClick={handleForgotPassword}>
-                Forgot Password?
-              </a>
-            </div>
+                <a href="#" onClick={handleForgotPassword}>
+                  Forgot Password?
+                </a>
+              </div>
               <Button className="btnLogin" variant="primary" type="submit">
                 Login
               </Button>
             </Form>
-            
+
             <div className="gotoSignup text-center mt-3">
-                Don't have an account? Go to <a href="/signup">Signup</a>
-          </div>
+              Don't have an account? Go to <a href="/signup">Signup</a>
+            </div>
           </Container>
         </Card.Body>
       </Card>
