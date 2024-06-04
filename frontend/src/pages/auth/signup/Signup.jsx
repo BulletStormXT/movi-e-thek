@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./signup.css";
 import Card from "react-bootstrap/Card";
 
 const Signup = () => {

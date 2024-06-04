@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Finlandica&display=swap');
+
 .App {
   text-align: center;
 }
@@ -30,11 +32,22 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #0d1b2a;
-  color: #fff;
+  font-family: 'Finlandica', Arial, sans-serif;
+  background: linear-gradient(360deg, rgb(11, 0, 23) 0%, rgba(0,212,255,0) 100%),  linear-gradient(180deg, rgba(0, 255, 238, 0.252) 0%, rgba(0,55,82,0) 100%) !important;
+  background-color: #0d1b2a !important;
+  color: rgba(240, 248, 255, 0.411);
+  color: #fff !important;
   height: 100vh;
 }
+
+.cardLogin{
+  background: linear-gradient(0deg, rgba(152, 150, 255, 0.05) 0%, rgba(0,55,82,0) 25%) !important;
+  background-color: #131439 !important;
+  color: #c4ceda !important;
+  }
+
+  
+
 /* 
 .sloginup {
   display: flex;
@@ -148,9 +161,57 @@ p {
 
 p a {
   color: #61dafb;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 p a:hover {
+  text-decoration: underline !important;
+}
+
+/* ! Anchor-Tag */
+
+a:link {
+  color: rgb(79, 150, 227);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: rgb(94, 158, 184);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: whitesmoke;
+  background-color: transparent;
   text-decoration: underline;
+}
+
+a:active {
+  color: blue;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: #3e5787 !important;
+} 
+
+.btnLogin {
+  background-color: #3e5787;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btnLogin:hover {
+  background-color: #293a76;
+}
+
+.gotoSignup {
+  padding-bottom: 10px;
 }

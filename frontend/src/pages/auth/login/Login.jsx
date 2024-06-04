@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Container, Form, Button, CardBody } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,9 +27,11 @@ const Login = () => {
       });
       const data = await response.json();
       console.log(data);
+    
 
       localStorage.setItem("token", data.token);
 
+      
       navigate("/admin/dashboard");
     } catch (error) {
       console.log(error);
@@ -42,6 +43,40 @@ const Login = () => {
     }
     console.log(formData);
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("http://localhost:3001/auth/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await response.json();
+  //     console.log(data);
+  
+  //     localStorage.setItem("token", data.token);
+  //     localStorage.setItem("role", data.role);
+  
+  //     const admin = localStorage.getItem('role') === 'admin';
+  //     if(admin) {
+  //       navigate("/admin/dashboard");
+  //     } else {
+  //       navigate("/user/dashboard");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setFormData({
+  //       email: "",
+  //       password: "",
+  //     });
+  //   }
+  // };
+
+  // alternative handlesubmit
 
   const handleForgotPassword = () => {
     navigate("/forgot-password");
@@ -55,12 +90,11 @@ const Login = () => {
         style={{
           width: "24rem",
           height: "30rem",
-          margin: "40px auto",
-          backgroundColor: "skyblue",
+          margin: "100px auto",
           color: "#0d1b2a",
           borderRadius: "20px",
         }}
-        className="cardShadow"
+        className="cardLogin cardShadow"
       >
         <Card.Body variant="dark">
           <div className="text-center">
@@ -92,15 +126,19 @@ const Login = () => {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Login
-              </Button>
-            </Form>
-            <div className="text-center mt-3">
+              <div className="text-center mt-3">
               <a href="#" onClick={handleForgotPassword}>
                 Forgot Password?
               </a>
             </div>
+              <Button className="btnLogin" variant="primary" type="submit">
+                Login
+              </Button>
+            </Form>
+            
+            <div className="gotoSignup text-center mt-3">
+                Don't have an account? Go to <a href="/signup">Signup</a>
+          </div>
           </Container>
         </Card.Body>
       </Card>
