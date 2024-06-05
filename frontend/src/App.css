@@ -27,7 +27,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61dafb !important;
 }
 
 body {
@@ -38,14 +38,10 @@ body {
       rgb(11, 0, 23) 0%,
       rgba(0, 212, 255, 0) 100%
     ),
-    linear-gradient(
-      180deg,
-      rgba(0, 255, 238, 0.252) 0%,
-      rgba(0, 55, 82, 0) 100%
-    ) !important;
+    linear-gradient(180deg, rgba(0, 255, 238, 0.25) 0%, rgba(0, 55, 82, 0) 100%) !important;
   background-color: #0d1b2a !important;
-  color: rgba(240, 248, 255, 0.411);
-  color: #fff !important;
+  color: rgba(255, 240, 254, 0.411);
+  color: #ffffff !important;
   height: 100vh;
 }
 
@@ -56,7 +52,7 @@ body {
     rgba(0, 55, 82, 0) 25%
   ) !important;
   background-color: #131439 !important;
-  color: #c4ceda !important;
+  color: #b1bac5 !important;
 }
 
 /* 
@@ -136,11 +132,13 @@ header select {
 
 form input {
   background-color: #0d1b2a !important;
-  color: whitesmoke !important;
+  color: #b1bac5 !important;
   border: none !important;
   padding: 10px !important;
   margin-bottom: 10px !important;
-  border-radius: 5px !important;
+  border-radius: 10px !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #ffffff00,
+    0 1px 0 #ffffff00 !important;
 }
 
 form a {
@@ -186,7 +184,7 @@ p a:hover {
 /* ! Anchor-Tag */
 
 a:link {
-  color: rgb(79, 150, 227);
+  color: #4b719c !important;
   background-color: transparent;
   text-decoration: none;
 }
@@ -198,15 +196,15 @@ a:visited {
 }
 
 a:hover {
-  color: whitesmoke;
-  background-color: transparent;
-  text-decoration: underline;
+  color: whitesmoke !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
 }
 
 a:active {
-  color: blue;
-  background-color: transparent;
-  text-decoration: underline;
+  color: rgb(0, 255, 208) !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
 }
 
 .text-mutend {
@@ -214,8 +212,8 @@ a:active {
 }
 
 .btnLogin {
-  background-color: #3e5787 !important;
-  color: #efefef !important;
+  background-color: #113258 !important;
+  color: #b1bac5 !important;
   border: none !important;
   padding: 10px !important;
   border-radius: 5px !important;
@@ -224,9 +222,84 @@ a:active {
 }
 
 .btnLogin:hover {
-  background-color: #293a76 !important;
+  background-color: #001126 !important;
+  box-shadow: inset 6px 6px 2px 0 #00091376, inset -6px -6px 2px 0 #1132582d !important;
+  color: rgb(255, 0, 128) !important;
 }
 
 .gotoSignup {
-  padding-bottom: 10px;
+  margin-bottom: 10px !important;
+}
+
+.gotoLogin {
+  margin-bottom: 10px !important;
+}
+
+/* ! Main-Navbar */
+
+.main-navbar {
+  background-color: #001126 !important;
+  color: #b1bac5 !important;
+  padding: 10px 0 !important;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.649), 0 2px 4px 0 rgba(0, 0, 0, 0.648) !important;
+}
+
+.main-navbar button {
+  background-color: #113258 !important;
+  color: #b1bac5 !important;
+  /* padding: 10px !important; */
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  height: 44px;
+}
+
+.main-navbar button:hover {
+  background-color: #001126 !important;
+  box-shadow: inset 6px 6px 2px 0 #00091376, inset -6px -6px 2px 0 #1132582d !important;
+  color: rgb(255, 0, 128) !important;
+}
+
+/* ! Sub-Navbar */
+
+.sub-navbar-loggedin {
+  background-color: #001126 !important;
+  color: #b1bac5 !important;
+  /* padding: 10px 0 !important; */
+}
+
+.sub-navbar-loggedin a {
+  color: #b1bac5 !important;
+  /* padding: 10px !important; */
+  text-decoration: none !important;
+}
+
+.sub-navbar-loggedin a:hover {
+  color: #fff !important;
+  background-color: #113258 !important;
+}
+
+.sub-navbar-loggedout {
+  background-color: #113258 !important;
+  color: #b1bac5 !important;
+  /* padding: 10px 0 !important; */
+}
+
+.sub-navbar-loggedout a {
+  color: #b1bac5 !important;
+  /* padding: 10px !important; */
+  text-decoration: none !important;
+}
+
+.sub-navbar-loggedout a:hover {
+  color: #fff !important;
+  background-color: #113258 !important;
+}
+
+/* ! Forgot Password & SignUp */
+
+.forgot-password {
+  color: #b1bac5 !important;
+  text-align: center !important;
+  font-size: smaller !important;
 }

@@ -87,10 +87,9 @@ const Login = () => {
     navigate("/forgot-password");
   };
 
-  //? später vielleicht noch Farben ändern! @BulletStormXT
-
   return (
     <React.Fragment>
+      <div></div>
       <Card
         style={{
           width: "24rem",
@@ -116,9 +115,9 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                <Form.Text className="text-mutend">
+                <div className="text-mutend text-center">
                   We'll never share your email with anyone else.
-                </Form.Text>
+                </div>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -130,21 +129,22 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                 />
+                <div className="mt-0">
+                  <a href="#" onClick={handleForgotPassword}>
+                    Forgot your Password? Click here!
+                  </a>
+                </div>
               </Form.Group>
-              <div className="text-center mt-3">
-                <a href="#" onClick={handleForgotPassword}>
-                  Forgot Password?
-                </a>
-              </div>
               <Button className="btnLogin" variant="primary" type="submit">
                 Login
               </Button>
             </Form>
 
-            <div className="gotoSignup text-center mt-3">
+            <div className="gotoSignup text-center mt-5">
               Don't have an account? Go to <a href="/signup">Signup</a>
             </div>
           </Container>
+          {/* <div className="text-center text-danger mt-3 "> WIP </div> */}
         </Card.Body>
       </Card>
     </React.Fragment>

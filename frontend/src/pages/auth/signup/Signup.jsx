@@ -43,6 +43,7 @@ const Signup = () => {
 
   return (
     <React.Fragment>
+      <div></div>
       <Card
         style={{
           width: "24rem",
@@ -81,7 +82,7 @@ const Signup = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                <Form.Text className="text-muted">
+                <Form.Text className="text-mutend">
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
@@ -100,6 +101,9 @@ const Signup = () => {
                 Submit
               </Button>
             </Form>
+            <div className="gotoLogin text-center mt-3">
+              Already have an account? Go to <a href="/login">Login</a>
+            </div>
           </Container>
         </Card.Body>
       </Card>
