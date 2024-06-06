@@ -73,15 +73,16 @@ body {
   background-color: #131439 !important;
   color: #b1bac5 !important;
   width: 400px !important;
+  height: 560px !important;
   padding: 30px !important;
   border-radius: 15px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
 }
 
 .cardProduct img {
-  /* width: 100%; */
+  max-width: 200;
   border-radius: 10px !important;
-  max-height: 300px;
+  height: 300px;
 }
 
 .prodText {
