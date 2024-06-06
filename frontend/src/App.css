@@ -31,7 +31,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 !important;
   font-family: "Finlandica", Arial, sans-serif;
   background: linear-gradient(
       360deg,
@@ -43,7 +43,8 @@ body {
   background-attachment: fixed !important;
   color: rgba(255, 240, 254, 0.411);
   color: #ffffff !important;
-  height: 100vh;
+  /* height: 100vh; */
+  /* margin-bottom: 20px; */
 }
 
 .cardLogin {
@@ -88,6 +89,7 @@ body {
 .prodText {
   color: #b1bac5;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 header {
@@ -356,12 +358,27 @@ a:active {
   /* height: 44px; */
 }
 
-/* .searchbar-button {
-  height: 54px !important;
-} */
+/* ? ---------   */
+/* ? Scrollbar   */
+/* ? ---------   */
 
-.searchbar-button:hover {
-  background-color: #001126 !important;
-  box-shadow: inset 6px 6px 2px 0 #00091376, inset -6px -6px 2px 0 #1132582d !important;
-  color: rgb(255, 0, 128) !important;
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1b263b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #113258;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #344970;
+  border-radius: 12px;
 }

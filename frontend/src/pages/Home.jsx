@@ -18,8 +18,8 @@ const Home = () => {
         {/* <h2>Products</h2> */}
         <div className="containerProduct">
           {products.map((product) => (
-            <Link to="/Login">
-              <div key={product._id} className="cardProduct">
+            <Link to="/Login" key={product._id}>
+              <div className="cardProduct">
                 <p>
                   <img
                     src={product.image}
