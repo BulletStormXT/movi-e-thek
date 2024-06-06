@@ -27,9 +27,9 @@ const Home = () => {
                 />
               </p>
               <h4 className="text-center">{product.name}</h4>
-              <p>{product.category}</p>
+              <p>Genre: {product.category}</p>
               <p>Plot: {product.description}</p>
-              <p>{product.price.toFixed(2).replace(".", ",")} €</p>
+              <p>Price: {product.price.toFixed(2).replace(".", ",")} €</p>
             </div>
           ))}
         </div>
