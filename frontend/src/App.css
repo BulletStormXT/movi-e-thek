@@ -40,6 +40,7 @@ body {
     ),
     linear-gradient(180deg, rgba(0, 255, 238, 0.25) 0%, rgba(0, 55, 82, 0) 100%) !important;
   background-color: #0d1b2a !important;
+  background-attachment: fixed !important;
   color: rgba(255, 240, 254, 0.411);
   color: #ffffff !important;
   height: 100vh;
@@ -55,13 +56,38 @@ body {
   color: #b1bac5 !important;
 }
 
-/* 
-.sloginup {
+.containerProduct {
   display: flex;
-  text-align: center;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-} */
+  gap: 30px;
+}
+
+.cardProduct {
+  background: linear-gradient(
+    0deg,
+    rgba(152, 150, 255, 0.05) 0%,
+    rgba(0, 55, 82, 0) 25%
+  ) !important;
+  background-color: #131439 !important;
+  color: #b1bac5 !important;
+  width: 400px !important;
+  padding: 30px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.cardProduct img {
+  /* width: 100%; */
+  border-radius: 10px !important;
+  max-height: 300px;
+}
+
+.prodText {
+  color: #b1bac5;
+  margin-top: 20px;
+}
 
 header {
   display: flex;
@@ -88,46 +114,9 @@ header select {
   box-shadow: 0px 0px 20px 3px black;
 }
 
-.form-container {
-  background-color: #1b263b;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  width: 300px;
-  /* display: flex; */
-  /* text-align: left; */
-  /* text-align: center; */
-  /* justify-content: center;
-  align-items: center; */
-}
-
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1rem;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.tab.active {
-  font-weight: bold;
-  border-bottom: 2px solid #fff;
-}
-
 .form {
   display: none;
   flex-direction: column;
-}
-
-.form.active {
-  display: flex;
 }
 
 form input {
@@ -238,20 +227,27 @@ a:active {
 /* ! Main-Navbar */
 
 .main-navbar {
-  background-color: #001126 !important;
+  background: linear-gradient(
+      0deg,
+      rgba(152, 150, 255, 0.1) 0%,
+      rgba(0, 55, 82, 0) 50%
+    ),
+    #001126 !important;
   color: #b1bac5 !important;
   padding: 10px 0 !important;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.649), 0 2px 4px 0 rgba(0, 0, 0, 0.648) !important;
+  box-shadow: 0 4px 8px rgba(41, 0, 77, 0.4) !important;
+  position: relative !important;
+  z-index: 1000 !important;
 }
 
 .main-navbar button {
   background-color: #113258 !important;
   color: #b1bac5 !important;
-  /* padding: 10px !important; */
+  padding: 10px !important;
   border: none !important;
   cursor: pointer !important;
   font-size: 1rem !important;
-  height: 44px;
+  height: 54px;
 }
 
 .main-navbar button:hover {
@@ -264,6 +260,7 @@ a:active {
 
 .sub-navbar-loggedin {
   background-color: #001126 !important;
+
   color: #b1bac5 !important;
   /* padding: 10px 0 !important; */
 }
@@ -302,4 +299,72 @@ a:active {
   color: #b1bac5 !important;
   text-align: center !important;
   font-size: smaller !important;
+}
+
+/* Main-Navbar 3er div */
+.main-navbar-div {
+  width: 33.2% !important;
+}
+
+/* Shopping-Bag */
+
+.shopping-bag {
+  font-size: 2rem;
+  color: #b1bac5 !important;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  /* margin: 20px 0; */
+  padding-top: 0px;
+}
+
+.searchbar-form {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  align-content: center;
+  width: 100%;
+  height: 54px;
+  /* padding-top: 5px !important; */
+  /* margin-top: 5px !important; */
+}
+
+.searchbar-input {
+  background-color: #1b263b !important;
+  box-shadow: inset 0 1px 2px rgb(255, 255, 255), 0 -1px 1px #000000,
+    0 1px 0 #ffffff !important; /* AAAAAAAAAARGH */
+  height: 54px;
+  font-size: 1.3rem !important;
+  /* width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  */
+
+  /* display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  align-content: center !important; */
+  /* height: 44px; */
+}
+
+/* .searchbar-button {
+  height: 54px !important;
+} */
+
+.searchbar-button:hover {
+  background-color: #001126 !important;
+  box-shadow: inset 6px 6px 2px 0 #00091376, inset -6px -6px 2px 0 #1132582d !important;
+  color: rgb(255, 0, 128) !important;
+}
+
+.prodText {
+  color: #b1bac5;
 }

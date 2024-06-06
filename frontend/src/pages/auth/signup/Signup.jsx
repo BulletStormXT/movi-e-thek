@@ -82,9 +82,9 @@ const Signup = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                <Form.Text className="text-mutend">
+                {/* <Form.Text className="text-mutend">
                   We'll never share your email with anyone else.
-                </Form.Text>
+                </Form.Text> */}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">

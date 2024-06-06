@@ -115,9 +115,9 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                <div className="text-mutend text-center">
+                {/* <div className="text-mutend text-center">
                   We'll never share your email with anyone else.
-                </div>
+                </div> */}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
