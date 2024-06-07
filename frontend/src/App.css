@@ -74,10 +74,17 @@ body {
   background-color: #131439 !important;
   color: #b1bac5 !important;
   width: 400px !important;
-  height: 560px !important;
+  height: 600px !important;
   padding: 30px !important;
   border-radius: 15px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardProduct h4 {
+  height: 5ch;
 }
 
 .cardProduct img {
@@ -381,4 +388,30 @@ a:active {
 ::-webkit-scrollbar-thumb:hover {
   background: #344970;
   border-radius: 12px;
+}
+
+.price {
+  font-size: 25px !important;
+  /* font-weight: bold; */
+  vertical-align: super;
+  margin: 0 !important;
+  padding-bottom: 5px !important;
+}
+
+.a-price-whole {
+  font-size: 30px;
+}
+
+/* .a-price-decimal {
+  font-size: 15px;
+} */
+
+.a-price-fraction {
+  font-size: 17.5px;
+  vertical-align: super;
+}
+
+.a-price-symbol {
+  font-size: 17.5px;
+  vertical-align: super;
 }

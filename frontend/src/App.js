@@ -6,6 +6,7 @@ import Signup from "./pages/auth/signup/Signup";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Userdashboard from "./pages/dashboard/Userdashboard";
 import Home from "./pages/Home";
+import HomeUser from "./pages/HomeUser";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/user" element={<HomeUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />

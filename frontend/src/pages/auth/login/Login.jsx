@@ -49,40 +49,6 @@ const Login = () => {
     console.log(formData);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch("http://localhost:3001/auth/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-
-  //     localStorage.setItem("token", data.token);
-  //     localStorage.setItem("role", data.role);
-
-  //     const admin = localStorage.getItem('role') === 'admin';
-  //     if(admin) {
-  //       navigate("/admin/dashboard");
-  //     } else {
-  //       navigate("/user/dashboard");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setFormData({
-  //       email: "",
-  //       password: "",
-  //     });
-  //   }
-  // };
-
-  // alternative handlesubmit
-
   const handleForgotPassword = () => {
     navigate("/forgot-password");
   };
