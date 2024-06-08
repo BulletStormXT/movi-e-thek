@@ -136,7 +136,7 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand href="#home">
-          {token ? "Logged In" : "Not Logged In"}
+          {token ? `Hallo ${localStorage.getItem("name")}!` : "Please Login!"}
         </Navbar.Brand>
         <Nav className="me-auto">
           {token ? (

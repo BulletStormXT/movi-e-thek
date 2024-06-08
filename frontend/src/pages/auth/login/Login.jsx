@@ -29,6 +29,9 @@ const Login = () => {
       console.log(data);
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("name", data.name);
 
       // Check user role from the response (maybe PopUp)
       if (data.role === "admin") {
