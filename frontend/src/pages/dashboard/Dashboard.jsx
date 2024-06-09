@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, navigate } from "react-router-dom";
 import { Container, Table } from "react-bootstrap";
 import { FaRegTrashAlt } from "react-icons/fa";
 function Dashboard() {
   const token = localStorage.getItem("token");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+
+  // Kontrolle, ob es sich um einen Admin handelt
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+
+    if (role !== "admin") {
+      console.error(
+        "Access denied. Users are not allowed to access the admin dashboard."
+      );
+      navigate("/user/dashboard"); // navigate to a different page, e.g., home page
+    }
+  }, []);
 
   const handleDelete = async (id) => {
     try {

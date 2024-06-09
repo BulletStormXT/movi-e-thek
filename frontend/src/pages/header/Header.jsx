@@ -141,9 +141,21 @@ const Header = () => {
         <Nav className="me-auto">
           {token ? (
             <>
-              <Nav.Link as={Link} to="/dashboard">
+              {localStorage.getItem("role") === "admin" ? (
+                <Nav.Link as={Link} to="/admin/dashboard">
+                  Dashboard
+                </Nav.Link>
+              ) : localStorage.getItem("role") === "user" ? (
+                <Nav.Link as={Link} to="/user/dashboard">
+                  Dashboard
+                </Nav.Link>
+              ) : (
+                console.log("Invalid User")
+              )}
+
+              {/* <Nav.Link as={Link} to="/admin/dashboard">
                 Dashboard
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
             </>
           ) : (

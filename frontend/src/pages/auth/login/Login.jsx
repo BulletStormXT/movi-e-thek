@@ -37,7 +37,14 @@ const Login = () => {
       if (data.role === "admin") {
         navigate("/admin/dashboard");
       } else if (data.role === "user") {
-        navigate("/user/dashboard");
+        if (window.location.pathname !== "/admin/dashboard") {
+          navigate("/user/dashboard");
+        } else {
+          console.error(
+            "Access denied. Users are not allowed to access the admin dashboard."
+          );
+          navigate("/"); // navigate to a different page, e.g., home page
+        }
       } else {
         console.log("Invalid User");
       }
