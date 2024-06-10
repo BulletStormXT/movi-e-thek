@@ -63,6 +63,13 @@ const HomeUser = () => {
                     }}
                   ></p>
                 </p>
+                <button onClick={() => navigate("/user/dashboard")}>
+                  Add to Dashboard
+                </button>
+                <button onClick={() => navigate("/cart")}>
+                  {/* placeholder */}
+                  Add to Shopping Cart
+                </button>
               </div>
             </Link>
           ))}

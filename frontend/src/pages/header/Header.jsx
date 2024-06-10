@@ -109,6 +109,11 @@ function NavScrollExample() {
               <Button variant="outline-success searchbar-button">Search</Button>
             </Form>
           </div>
+          <div className="me-auto">
+            <Nav.Link as={Link} to="/user/profile">
+              Profile
+            </Nav.Link>
+          </div>
           <div className="main-navbar-div text-end shopping-bag">
             <TbShoppingBag />
           </div>
@@ -138,7 +143,7 @@ const Header = () => {
         <Navbar.Brand href="#home">
           {token ? `Hallo ${localStorage.getItem("name")}!` : "Please Login!"}
         </Navbar.Brand>
-        <Nav className="me-auto">
+        <Nav className="ml-auto">
           {token ? (
             <>
               {localStorage.getItem("role") === "admin" ? (
@@ -156,6 +161,9 @@ const Header = () => {
               {/* <Nav.Link as={Link} to="/admin/dashboard">
                 Dashboard
               </Nav.Link> */}
+              <Nav.Link as={Link} to="/user/profile">
+                Profile
+              </Nav.Link>
               <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
             </>
           ) : (

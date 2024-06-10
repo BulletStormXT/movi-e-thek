@@ -9,6 +9,7 @@ const productRoute = require("./routes/productRoutes");
 const cors = require("cors");
 const movieRoute = require("./routes/movieRoutes");
 const createAdminAccount = require("./scripts/admin");
+const cartRoutes = require("./routes/cart");
 
 const app = express();
 
@@ -17,11 +18,15 @@ app.use(cors());
 
 createAdminAccount();
 
+//userRoutes
 app.use("/user", signupRoute);
 app.use("/auth", loginRoute);
 app.use("/api", userRoute);
+//movieRoutes
 app.use("/api/products", productRoute);
 app.use("/api/movies", movieRoute);
+//cartRoutes
+app.use("/api/cart", cartRoutes);
 
 const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => {

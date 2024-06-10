@@ -239,13 +239,13 @@ a:active {
 .main-navbar {
   background: linear-gradient(
       0deg,
-      rgba(152, 150, 255, 0.1) 0%,
-      rgba(0, 55, 82, 0) 50%
+      rgba(150, 255, 255, 0.05) 0%,
+      rgba(0, 55, 82, 0) 75%
     ),
     #001126 !important;
   color: #b1bac5 !important;
   padding: 10px 0 !important;
-  box-shadow: 0 4px 8px rgba(41, 0, 77, 0.4) !important;
+  box-shadow: 0 4px 8px rgba(20, 0, 37, 0.4) !important;
   position: relative !important;
   z-index: 1000 !important;
 }
@@ -270,7 +270,7 @@ a:active {
 
 .sub-navbar-loggedin {
   background-color: #001126 !important;
-
+  box-shadow: 0 4px 8px rgba(0, 30, 71, 0.5) !important;
   color: #b1bac5 !important;
   /* padding: 10px 0 !important; */
 }
