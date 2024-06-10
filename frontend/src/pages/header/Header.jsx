@@ -1,57 +1,3 @@
-/* import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle";
-import { Link, useNavigate } from "react-router-dom";
-
-const Header = () => {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const navigate = useNavigate();
-
-  const handleLogOut = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  return (
-    <>
-      {" "}
-      <Navbar bg={token ? "primary" : "dark"} data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">
-            {token ? "Logged In" : "Not Logged In"}
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            {token ? (
-              <>
-                <Nav.Link as={Link} to="/dashboard">
-                  Dashboard
-                </Nav.Link>
-                <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/Login">
-                  Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/Signup">
-                  Signup
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
-        </Container>
-      </Navbar>
-    </>
-  );
-};
-
-export default Header;
- */
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
@@ -63,11 +9,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { TbShoppingBag } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
 
 function NavScrollExample() {
   return (
     <Navbar expand="lg" className="main-navbar">
-      {" "}
       {/* bg-body-tertiary  */}
       <Container fluid>
         <Navbar.Brand href="#">Mov•Ǝ•Thek</Navbar.Brand>
@@ -79,7 +25,18 @@ function NavScrollExample() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/">Home</Nav.Link>
+              {/* ! home button in header doesn't work // only after actualization */}
+              {localStorage.getItem("role") === "user" ? (
+                <Nav.Link as={Link} to="/user">
+                  Home
+                </Nav.Link>
+              ) : (
+                <Nav.Link as={Link} to="/">
+                  Home
+                </Nav.Link>
+              )}
+
+              {/* <Nav.Link href="/">Home</Nav.Link> */}
               <Nav.Link href="#action2">Link</Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -102,20 +59,27 @@ function NavScrollExample() {
               {/* className="d-flex" */}
               <Form.Control
                 type="search"
-                placeholder="Search"
+                placeholder="Enter a keyword and press 🦆 to search..."
                 className="me-2 searchbar-input"
                 aria-label="Search"
               />
               <Button variant="outline-success searchbar-button">Search</Button>
             </Form>
           </div>
-          <div className="me-auto">
+          {/* profile and shopping bag */}
+          {/* <div className="me-auto">
             <Nav.Link as={Link} to="/user/profile">
               Profile
             </Nav.Link>
-          </div>
+          </div> */}
           <div className="main-navbar-div text-end shopping-bag">
-            <TbShoppingBag />
+            <Nav.Link as={Link} to="/user/profile">
+              <CgProfile />
+            </Nav.Link>
+            &nbsp;
+            <Nav.Link as={Link} to="/user/cart">
+              <TbShoppingBag />
+            </Nav.Link>
           </div>
         </Navbar.Collapse>
       </Container>
@@ -129,6 +93,9 @@ const Header = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
     navigate("/login");
   };
 

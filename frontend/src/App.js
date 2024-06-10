@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Userdashboard from "./pages/dashboard/Userdashboard";
 import Home from "./pages/Home";
 import HomeUser from "./pages/HomeUser";
+import UserProfile from "./pages/profile/UserProfile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user" element={<HomeUser />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/user/dashboard" element={<Userdashboard />} />

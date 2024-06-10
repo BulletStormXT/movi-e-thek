@@ -15,7 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(express.json());
 createAdminAccount();
 
 //userRoutes
@@ -28,7 +28,7 @@ app.use("/api/movies", movieRoute);
 //cartRoutes
 app.use("/api/cart", cartRoutes);
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

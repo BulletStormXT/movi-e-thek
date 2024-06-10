@@ -38,7 +38,7 @@ const Login = () => {
         navigate("/admin/dashboard");
       } else if (data.role === "user") {
         if (window.location.pathname !== "/admin/dashboard") {
-          navigate("/user/dashboard");
+          navigate("/user/");
         } else {
           console.error(
             "Access denied. Users are not allowed to access the admin dashboard."

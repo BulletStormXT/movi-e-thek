@@ -99,6 +99,22 @@ body {
   margin-bottom: 20px;
 }
 
+.add2Db {
+  margin-top: 5px;
+  background-color: #b1bac5;
+  color: #4b719c;
+  border-radius: 5px !important;
+  border: none !important;
+}
+
+.add2SC {
+  margin-top: 5px;
+  background-color: #4b719c;
+  color: #b1bac5;
+  border-radius: 5px !important;
+  border: none !important;
+}
+
 header {
   display: flex;
   justify-content: space-between;
