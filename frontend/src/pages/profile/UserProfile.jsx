@@ -1,4 +1,5 @@
-import { userProfileCSS } from "./UserProfile.css.js";
+import React, { useEffect, useState } from "react";
+import { userProfileCSS } from "./UserProfile.css.jsx";
 
 const injectCSS = (cssString) => {
   const styleElement = document.createElement("style");
@@ -6,36 +7,43 @@ const injectCSS = (cssString) => {
   document.head.appendChild(styleElement);
 };
 
-injectCSS(userProfileCSS);
-
 const fetchUserData = () => {
-  fetch("user", {
+  return fetch("user", {
     method: "GET",
-    header: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      renderUserProfile(data);
-    })
-    .catch((error) => console.error("Error fetching User Data:", error));
+    headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+  }).then((response) => response.json());
 };
 
-const renderUserProfile = (userData) => {
-  const profilePicture = document.createElement("img");
-  profilePicture.src = userData.profilePicture;
+const UserProfile = () => {
+  const [userData, setUserData] = useState(null);
 
-  const username = document.createElement("h2");
-  username.textContent = userData.username;
+  useEffect(() => {
+    injectCSS(userProfileCSS);
 
-  const email = document.createElement("p");
-  email.textContent = userData.email;
+    fetchUserData()
+      .then((data) => {
+        setUserData(data);
+      })
+      .catch((error) => console.error("Error fetching user data:", error));
+  }, []);
 
-  const profileContainer = document.getElementById("profile-container");
-  profileContainer.appendChild(profilePicture);
-  profileContainer.appendChild(username);
-  profileContainer.appendChild(email);
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div id="profile-container" className="profile-container">
+      <img
+        src={userData.profilePicture}
+        alt="Profile"
+        className="profile-picture"
+      />
+      <div>
+        <h2 className="username">{userData.username}</h2>
+        <p className="email">{userData.email}</p>
+      </div>
+    </div>
+  );
 };
 
-window.addEventListener("load", fetchUserData);
-
-export default userProfileCSS;
+export default UserProfile;

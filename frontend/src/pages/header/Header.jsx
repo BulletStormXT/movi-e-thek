@@ -16,7 +16,19 @@ function NavScrollExample() {
     <Navbar expand="lg" className="main-navbar">
       {/* bg-body-tertiary  */}
       <Container fluid>
-        <Navbar.Brand href="#">Mov•Ǝ•Thek</Navbar.Brand>
+        <Navbar.Brand>
+          {" "}
+          {localStorage.getItem("role") === "user" ? (
+            <Nav.Link as={Link} to="/user">
+              Mov•Ǝ•Thek
+            </Nav.Link>
+          ) : (
+            <Nav.Link as={Link} to="/">
+              Mov•Ǝ•Thek
+            </Nav.Link>
+          )}
+        </Navbar.Brand>{" "}
+        {/* <Navbar.Brand href="#home">Mov•Ǝ•Thek</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <div className="main-navbar-div">
@@ -26,7 +38,7 @@ function NavScrollExample() {
               navbarScroll
             >
               {/* ! home button in header doesn't work // only after actualization */}
-              {localStorage.getItem("role") === "user" ? (
+              {/* {localStorage.getItem("role") === "user" ? (
                 <Nav.Link as={Link} to="/user">
                   Home
                 </Nav.Link>
@@ -34,10 +46,10 @@ function NavScrollExample() {
                 <Nav.Link as={Link} to="/">
                   Home
                 </Nav.Link>
-              )}
+              )} */}
 
               {/* <Nav.Link href="/">Home</Nav.Link> */}
-              <Nav.Link href="#action2">Link</Nav.Link>
+              {/* <Nav.Link href="#action2">Link</Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
@@ -50,7 +62,7 @@ function NavScrollExample() {
               </NavDropdown>
               <Nav.Link href="#" disabled>
                 Link
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </div>
           {/* search bar */}
