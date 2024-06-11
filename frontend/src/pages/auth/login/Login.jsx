@@ -32,6 +32,7 @@ const Login = () => {
       localStorage.setItem("role", data.role);
       localStorage.setItem("email", data.email);
       localStorage.setItem("name", data.name);
+      localStorage.setItem("cart", JSON.stringify(data.cart));
 
       // Check user role from the response (maybe PopUp)
       if (data.role === "admin") {

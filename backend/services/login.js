@@ -17,8 +17,14 @@ async function login(email, password) {
     }
     const token = generateToken(existingUser);
 
-    //return token, name and role of the user
-    return { token, name: existingUser.name, role: existingUser.role };
+    //return token, name, role and cart of the user
+    return {
+      token,
+      name: existingUser.name,
+      role: existingUser.role,
+      email: existingUser.email,
+      cart: existingUser.cart,
+    };
   } catch (error) {
     console.log(error.message);
     throw new Error("Invalid credentials");
