@@ -5,7 +5,7 @@ import Login from "./pages/auth/login/Login";
 import Signup from "./pages/auth/signup/Signup";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Userdashboard from "./pages/dashboard/Userdashboard";
-import Home from "./pages/Home";
+// import Home from "./pages/Home";
 import HomeUser from "./pages/HomeUser";
 import UserProfile from "./pages/profile/UserProfile";
 import UserCart from "./pages/cart/UserCart.jsx";
@@ -15,8 +15,8 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/user" element={<HomeUser />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<HomeUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/signup" element={<Signup />} />

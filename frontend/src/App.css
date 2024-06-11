@@ -58,12 +58,16 @@ body {
 }
 
 .containerProduct {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 30px !important;
 }
+
+/* .cardWrapper {
+  margin-bottom: 20px;
+} */
 
 .cardProduct {
   background: linear-gradient(
@@ -136,6 +140,16 @@ header select {
   font-size: 1rem;
 }
 
+.ari {
+  margin-left: 30px !important;
+  font-weight: 666 !important;
+}
+
+.sidar {
+  margin-left: -70px !important;
+  font-weight: 666 !important;
+}
+
 .cardShadow {
   box-shadow: 0px 0px 20px 3px black;
 }
@@ -200,14 +214,14 @@ p a:hover {
 
 a:link {
   color: #4b719c !important;
-  background-color: transparent;
-  text-decoration: none;
+  background-color: transparent !important;
+  text-decoration: none !important;
 }
 
 a:visited {
-  color: rgb(94, 158, 184);
-  background-color: transparent;
-  text-decoration: none;
+  color: rgb(94, 158, 184) !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -264,6 +278,7 @@ a:active {
   box-shadow: 0 4px 8px rgba(20, 0, 37, 0.4) !important;
   position: relative !important;
   z-index: 1000 !important;
+  height: 100px !important;
 }
 
 .main-navbar button {
@@ -273,7 +288,7 @@ a:active {
   border: none !important;
   cursor: pointer !important;
   font-size: 1rem !important;
-  height: 54px;
+  height: 50px;
 }
 
 .main-navbar button:hover {
@@ -344,11 +359,12 @@ a:active {
 
 .searchbar {
   display: flex;
+  /* height: 20px !important; */
   justify-content: center;
   align-items: center;
   align-content: center;
   /* margin: 20px 0; */
-  padding-top: 0px;
+  /* padding-top: 0px; */
 }
 
 .searchbar-form {
@@ -357,9 +373,9 @@ a:active {
   /* align-items: center; */
   align-content: center;
   width: 100%;
-  height: 54px;
-  /* padding-top: 5px !important; */
-  /* margin-top: 5px !important; */
+  height: 40px;
+  margin-top: 7.5px !important;
+  margin-bottom: 20px !important;
 }
 
 .searchbar-input {

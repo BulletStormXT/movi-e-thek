@@ -16,17 +16,10 @@ function NavScrollExample() {
     <Navbar expand="lg" className="main-navbar">
       {/* bg-body-tertiary  */}
       <Container fluid>
-        <Navbar.Brand>
-          {" "}
-          {localStorage.getItem("role") === "user" ? (
-            <Nav.Link as={Link} to="/user">
-              Mov•Ǝ•Thek
-            </Nav.Link>
-          ) : (
-            <Nav.Link as={Link} to="/">
-              Mov•Ǝ•Thek
-            </Nav.Link>
-          )}
+        <Navbar.Brand className="ari">
+          <Nav.Link as={Link} to="/">
+            Mov•Ǝ•Thek
+          </Nav.Link>
         </Navbar.Brand>{" "}
         {/* <Navbar.Brand href="#home">Mov•Ǝ•Thek</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -75,7 +68,7 @@ function NavScrollExample() {
                 className="me-2 searchbar-input"
                 aria-label="Search"
               />
-              <Button variant="outline-success searchbar-button">Search</Button>
+              <Button variant="searchbar-button">Search</Button>
             </Form>
           </div>
           {/* profile and shopping bag */}
@@ -120,8 +113,10 @@ const Header = () => {
       className={token ? "sub-navbar-loggedin" : "sub-navbar-loggedout"}
     >
       <Container>
-        <Navbar.Brand href="#home">
-          {token ? `Hallo ${localStorage.getItem("name")}!` : "Please Login!"}
+        <Navbar.Brand className="sidar" href="#home">
+          {token
+            ? `Hallo ${localStorage.getItem("name")}!`
+            : "Please Login, Ari!"}
         </Navbar.Brand>
         <Nav className="ml-auto">
           {token ? (

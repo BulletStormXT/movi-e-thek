@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const HomeUser = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const role = localStorage.getItem("role");
+  const isLoggedIn = role === "user";
 
   useEffect(() => {
     fetch("http://localhost:3001/api/products")
@@ -23,12 +24,11 @@ const HomeUser = () => {
   }, []);
 
   //   doesn't work now
-
-  if (formData.role === "user") {
-    navigate("/user");
-  } else {
-    console.log("Invalid User");
-  }
+  // if (formData.role === "user") {
+  //   navigate("/user");
+  // } else {
+  //   console.log("Invalid User");
+  // }
 
   return (
     <div className="prodText">
@@ -40,7 +40,7 @@ const HomeUser = () => {
             const [whole, fraction] = product.price.toFixed(2).split(".");
             // link to user established
             return (
-              <Link to="/user" key={product._id}>
+              <div key={product._id}>
                 <div className="cardProduct">
                   <p>
                     <img
@@ -52,7 +52,7 @@ const HomeUser = () => {
                   </p>
                   <h4 className="text-center">{product.name}</h4>
                   <p>Genre: {product.category}</p>
-                  <p>Plot: {product.description}</p>
+                  {/* <p>Plot: {product.description}</p> */}
                   <p className="price">
                     <span className="a-price-whole">{whole}</span>
                     <span className="a-price-decimal"></span>
@@ -60,18 +60,25 @@ const HomeUser = () => {
                     <span className="a-price-symbol"> €</span>
                   </p>
 
-                  <button
-                    className="add2Db"
-                    onClick={() => navigate("/user/dashboard")}
-                  >
-                    Add to Dashboard
-                  </button>
-                  <button className="add2SC" onClick={() => navigate("/cart")}>
-                    {/* placeholder */}
-                    Add to Shopping Cart
-                  </button>
+                  {isLoggedIn && (
+                    <>
+                      {" "}
+                      <button
+                        className="add2Db"
+                        onClick={() => navigate("/user/dashboard")}
+                      >
+                        Add to Dashboard
+                      </button>
+                      <button
+                        className="add2SC"
+                        onClick={() => navigate("/cart")}
+                      >
+                        Add to Shopping Cart
+                      </button>
+                    </>
+                  )}
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

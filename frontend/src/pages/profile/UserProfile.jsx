@@ -27,20 +27,20 @@ const UserProfile = () => {
       .catch((error) => console.error("Error fetching user data:", error));
   }, []);
 
-  if (!userData) {
+  /* if (!userData) {
     return <div>Loading...</div>;
-  }
+  } */
 
   return (
     <div id="profile-container" className="profile-container">
-      <img
+      {/* <img
         src={userData.profilePicture}
         alt="Profile"
         className="profile-picture"
-      />
+      />*/}
       <div>
-        <h2 className="username">{userData.username}</h2>
-        <p className="email">{userData.email}</p>
+        <h2 className="username">{localStorage.getItem("name")}</h2>
+        <p className="email">{localStorage.getItem("email")}</p>
       </div>
     </div>
   );

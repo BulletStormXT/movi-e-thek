@@ -39,7 +39,7 @@ const Login = () => {
         navigate("/admin/dashboard");
       } else if (data.role === "user") {
         if (window.location.pathname !== "/admin/dashboard") {
-          navigate("/user/");
+          navigate("/");
         } else {
           console.error(
             "Access denied. Users are not allowed to access the admin dashboard."
@@ -57,6 +57,7 @@ const Login = () => {
         password: "",
       });
     }
+    // for presentation put inactivate the console.log
     console.log(formData);
   };
 
