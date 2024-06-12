@@ -32,7 +32,7 @@ const UserDashboard = () => {
   }, [search]);
 
   return (
-    <div>
+    <div className="udash">
       <h1 style={{ textAlign: "center" }}>User Dashboard</h1>
       <input
         type="text"
@@ -40,17 +40,19 @@ const UserDashboard = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div>
+      <div className="udash-search">
         {movies.map(
           (movie) =>
             (movie.name.toLowerCase().includes(search.toLowerCase()) ||
               movie.category.toLowerCase().includes(search.toLowerCase())) && (
-              <div key={movie._id}>
-                <h3>{movie.name}</h3>
-                <p>{movie.description}</p>
-                <p>Price: €{movie.price}</p>
-                <p>Category: {movie.category}</p>
-                <img src={movie.image} alt={movie.name} />
+              <div className="udash-res-cont" key={movie._id}>
+                <div className="udash-res">
+                  <h3>{movie.name}</h3>
+                  <img src={movie.image} alt={movie.name} />
+                  <p>{movie.description}</p>
+                  <p>Category: {movie.category}</p>
+                  <p>Price: €{movie.price}</p>
+                </div>
               </div>
             )
         )}

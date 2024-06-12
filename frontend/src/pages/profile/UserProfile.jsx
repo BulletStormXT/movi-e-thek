@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from "react";
-/* import { userProfileCSS } from "./UserProfile.css.jsx"; */
-
-/* const injectCSS = (cssString) => {
-  const styleElement = document.createElement("style");
-  styleElement.textContent = cssString;
-  document.head.appendChild(styleElement);
-}; */
 
 const fetchUserData = () => {
   return fetch("user", {
@@ -15,21 +8,15 @@ const fetchUserData = () => {
 };
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState(null);
+  const [setUserData] = useState(null);
 
   useEffect(() => {
-    /* injectCSS(userProfileCSS); */
-
     fetchUserData()
       .then((data) => {
         setUserData(data);
       })
       .catch((error) => console.error("Error fetching user data:", error));
   }, []);
-
-  /* if (!userData) {
-    return <div>Loading...</div>;
-  } */
 
   return (
     <div id="profile-container" className="profile-container">

@@ -47,6 +47,16 @@ body {
   /* margin-bottom: 20px; */
 }
 
+img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+img:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+}
+
 .cardLogin {
   background: linear-gradient(
     0deg,
@@ -548,4 +558,119 @@ a:active {
   font-size: 20px;
   color: #b1bac5;
   text-align: center;
+}
+
+/* ! Cart */
+
+.cart-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+}
+
+.cart-card {
+  background: linear-gradient(
+    0deg,
+    rgba(152, 150, 255, 0.05) 0%,
+    rgba(0, 55, 82, 0) 25%
+  ) !important;
+  background-color: #131439 !important;
+  display: flex;
+  align-items: center;
+  margin: 30px;
+  height: 300px;
+  width: 800px;
+  padding: 30px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  flex-direction: row;
+  justify-content: baseline;
+}
+
+.cart-card-image {
+  max-width: 130px;
+  height: 160px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.cart-card-image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 162px;
+  width: 132px;
+}
+
+.cart-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-card-text h4 {
+  margin: 0;
+}
+
+/* User Dashboard */
+
+.udash {
+  color: #b1bac5;
+  display: flex !important;
+  align-items: center;
+  flex-direction: column !important;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 30px !important;
+  flex-wrap: wrap !important;
+}
+
+.udash-search {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  display: grid;
+  gap: 30px !important;
+}
+
+.udash-res-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  gap: 30px;
+}
+
+.udash-res {
+  background: linear-gradient(
+    0deg,
+    rgba(152, 150, 255, 0.05) 0%,
+    rgba(0, 55, 82, 0) 25%
+  ) !important;
+  background-color: #131439 !important;
+  width: 400px !important;
+  height: 600px !important;
+  padding: 30px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  align-content: stretch !important;
+  gap: 10px !important;
+}
+/* we made it  */
+.udash-res h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.udash-search img {
+  max-width: 200px;
+  border-radius: 10px !important;
+  height: 300px;
 }

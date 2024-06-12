@@ -48,25 +48,28 @@ const UserCart = () => {
   };
 
   return (
-    <div>
+    <div className="cart-body">
       {cart.map((item) => (
-        <div key={item._id}>
-          <div>
+        <div key={item._id} className="cart-card">
+          <div className="cart-card-image-box">
             <img
               src={item.product.image}
               alt={item.product.name}
               title={item.product.name}
+              className="cart-card-image"
             />
           </div>
-          <h4>{item.product.name}</h4>
-          <input
-            type="number"
-            min="1"
-            max="10"
-            value={item.quantity}
-            onChange={(e) => updateQuantity(item._id, e.target.value)}
-          />
-          <button onClick={() => deleteItem(item._id)}>Löschen</button>
+          <div>
+            <h4>{item.product.name}</h4>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              value={item.quantity}
+              onChange={(e) => updateQuantity(item._id, e.target.value)}
+            />
+            <button onClick={() => deleteItem(item._id)}>Löschen</button>
+          </div>
         </div>
       ))}
       <h3>Gesamtpreis: {total}</h3>
