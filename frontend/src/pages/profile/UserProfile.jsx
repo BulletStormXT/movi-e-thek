@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { userProfileCSS } from "./UserProfile.css.jsx";
+/* import { userProfileCSS } from "./UserProfile.css.jsx"; */
 
-const injectCSS = (cssString) => {
+/* const injectCSS = (cssString) => {
   const styleElement = document.createElement("style");
   styleElement.textContent = cssString;
   document.head.appendChild(styleElement);
-};
+}; */
 
 const fetchUserData = () => {
   return fetch("user", {
@@ -18,7 +18,7 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    injectCSS(userProfileCSS);
+    /* injectCSS(userProfileCSS); */
 
     fetchUserData()
       .then((data) => {
@@ -38,9 +38,13 @@ const UserProfile = () => {
         alt="Profile"
         className="profile-picture"
       />*/}
-      <div>
-        <h2 className="username">{localStorage.getItem("name")}</h2>
-        <p className="email">{localStorage.getItem("email")}</p>
+      <div className="ppph-frame">
+        <div className="ppph">PP</div>
+      </div>
+      {/*~SPACE~*/}
+      <div className="text-container">
+        <p className="username">Username: {localStorage.getItem("name")}</p>
+        <p className="email">Email: {localStorage.getItem("email")}</p>
       </div>
     </div>
   );

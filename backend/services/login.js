@@ -24,6 +24,7 @@ async function login(email, password) {
       role: existingUser.role,
       email: existingUser.email,
       cart: existingUser.cart,
+      _id: existingUser._id,
     };
   } catch (error) {
     console.log(error.message);

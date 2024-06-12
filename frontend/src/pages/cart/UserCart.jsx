@@ -1,7 +1,77 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const UserCart = () => {
-  return <div>userCart</div>;
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    fetch(
+      `http://localhost:3001/api/cart/users/${localStorage.getItem(
+        "userId"
+      )}/cart`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setCart(data);
+        setTotal(
+          data.reduce(
+            (acc, item) => acc + item.product.price * item.quantity,
+            0
+          )
+        );
+      });
+  }, []);
+
+  const updateQuantity = (_id, quantity) => {
+    setCart(
+      cart.map((item) => (item._id === _id ? { ...item, quantity } : item))
+    );
+    setTotal(
+      cart.reduce(
+        (acc, item) =>
+          acc +
+          (item._id === _id ? quantity : item.quantity) * item.product.price,
+        0
+      )
+    );
+  };
+
+  const deleteItem = (_id) => {
+    setCart(cart.filter((item) => item._id !== _id));
+    setTotal(
+      cart.reduce(
+        (acc, item) =>
+          acc + (item._id !== _id ? item.quantity * item.product.price : 0),
+        0
+      )
+    );
+  };
+
+  return (
+    <div>
+      {cart.map((item) => (
+        <div key={item._id}>
+          <div>
+            <img
+              src={item.product.image}
+              alt={item.product.name}
+              title={item.product.name}
+            />
+          </div>
+          <h4>{item.product.name}</h4>
+          <input
+            type="number"
+            min="1"
+            max="10"
+            value={item.quantity}
+            onChange={(e) => updateQuantity(item._id, e.target.value)}
+          />
+          <button onClick={() => deleteItem(item._id)}>Löschen</button>
+        </div>
+      ))}
+      <h3>Gesamtpreis: {total}</h3>
+    </div>
+  );
 };
 
 export default UserCart;

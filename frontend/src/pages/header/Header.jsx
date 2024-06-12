@@ -102,6 +102,7 @@ const Header = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("email");
     localStorage.removeItem("cart");
+    localStorage.removeItem("userId");
     navigate("/login");
   };
 
