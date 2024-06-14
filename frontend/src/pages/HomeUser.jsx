@@ -42,24 +42,26 @@ const HomeUser = () => {
             return (
               <div key={product._id}>
                 <div className="cardProduct">
-                  <p>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      title={product.name}
-                      className="imgProduct"
-                    />
-                  </p>
-                  <h4 className="text-center">{product.name}</h4>
-                  <p>Genre: {product.category}</p>
-                  {/* <p>Plot: {product.description}</p> */}
-                  
-                  <p className="price">
-                    <span className="a-price-whole">{whole}</span>
-                    <span className="a-price-decimal"></span>
-                    <span className="a-price-fraction">{fraction}</span>
-                    <span className="a-price-symbol"> €</span>
-                  </p>
+                  <Link to={`/product/${product._id}`}>
+                    <p>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        title={product.name}
+                        className="imgProduct"
+                      />
+                    </p>
+                    <h4 className="text-center">{product.name}</h4>
+                    <p>Genre: {product.category}</p>
+                    {/* <p>Plot: {product.description}</p> */}
+
+                    <p className="price">
+                      <span className="a-price-whole">{whole}</span>
+                      <span className="a-price-decimal"></span>
+                      <span className="a-price-fraction">{fraction}</span>
+                      <span className="a-price-symbol"> €</span>
+                    </p>
+                  </Link>
 
                   {isLoggedIn && (
                     <>

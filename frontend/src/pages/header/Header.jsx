@@ -15,9 +15,9 @@ import { CgProfile } from "react-icons/cg";
 function NavScrollExample() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const navigate = useNavigate();
 
-
-  // card styling must be added 
+  // card styling must be added
   const debouncedFetchMovies = debounce(async (query) => {
     if (query) {
       try {
@@ -39,6 +39,13 @@ function NavScrollExample() {
 
   const handleSearch = () => {
     debouncedFetchMovies(search);
+  };
+
+  // Clear search results and navigate to product details
+  const handleSearchResultClick = (productId) => {
+    setSearchResult([]);
+    setSearch("");
+    navigate(`/product/${productId}`);
   };
 
   return (
@@ -106,7 +113,11 @@ function NavScrollExample() {
             {searchResult.length > 0 && (
               <div className="search-results">
                 {searchResult.map((product) => (
-                  <div key={product._id} className="search-result-item">
+                  <div
+                    key={product._id}
+                    className="search-result-item"
+                    onClick={() => handleSearchResultClick(product._id)}
+                  >
                     <Link to={`/product/${product._id}`}>
                       {product.name} - €{product.price.toFixed(2)}
                     </Link>

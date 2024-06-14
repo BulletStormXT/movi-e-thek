@@ -1,28 +1,63 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
-  const location = useLocation();
-  const { movie } = location.state || {};
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  //needs styling, fetches product data from the backend
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/products/${productId}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch product data");
+        }
+        const data = await response.json();
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+        setError("Failed to fetch product data. Please try again later.");
+        setLoading(false);
+      }
+    };
 
-  if (!movie) {
-    return <p>No movie data available.</p>;
+    fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
-  const { name, image, category, description, price } = movie;
-  const [whole, fraction] = price.toFixed(2).split(".");
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!product) {
+    return <p>No product data available.</p>;
+  }
+
+  const { name, image, category, description, price } = product;
+  const formattedPrice = price.toFixed(2);
 
   return (
     <div className="prod-detail">
       <h2>{name}</h2>
-      <img src={image} alt={name} />
-      <p>Category: {category}</p>
-      <p>{description}</p>
+      <div className="product-image">
+        <img src={image} alt={name} />
+      </div>
+      <p>
+        <strong>Category:</strong> {category}
+      </p>
+      <p>
+        <strong>Description:</strong> {description}
+      </p>
       <p className="price">
-        <span className="a-price-whole">{whole}</span>
-        <span className="a-price-decimal"></span>
-        <span className="a-price-fraction">{fraction}</span>
-        <span className="a-price-symbol"> €</span>
+        <strong>Price:</strong> {formattedPrice} €
       </p>
     </div>
   );
