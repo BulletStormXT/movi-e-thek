@@ -53,6 +53,7 @@ const HomeUser = () => {
                   <h4 className="text-center">{product.name}</h4>
                   <p>Genre: {product.category}</p>
                   {/* <p>Plot: {product.description}</p> */}
+                  
                   <p className="price">
                     <span className="a-price-whole">{whole}</span>
                     <span className="a-price-decimal"></span>

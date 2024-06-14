@@ -9,6 +9,7 @@ import Userdashboard from "./pages/dashboard/Userdashboard";
 import HomeUser from "./pages/HomeUser";
 import UserProfile from "./pages/profile/UserProfile";
 import UserCart from "./pages/cart/UserCart.jsx";
+import ProductDetail from "./pages/productdetail/ProductDetail.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<HomeUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/productdetail" element={<ProductDetail />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/user/dashboard" element={<Userdashboard />} />

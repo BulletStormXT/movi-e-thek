@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import debounce from "lodash.debounce";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import Button from "react-bootstrap/Button";
@@ -12,6 +13,34 @@ import { TbShoppingBag } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
 
 function NavScrollExample() {
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+
+
+  // card styling must be added 
+  const debouncedFetchMovies = debounce(async (query) => {
+    if (query) {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/products?search=${query}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setSearchResult(data);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    } else {
+      setSearchResult([]);
+    }
+  }, 500);
+
+  const handleSearch = () => {
+    debouncedFetchMovies(search);
+  };
+
   return (
     <Navbar expand="lg" className="main-navbar">
       {/* bg-body-tertiary  */}
@@ -67,9 +96,24 @@ function NavScrollExample() {
                 placeholder="Enter a keyword and press 🦆 to search..."
                 className="me-2 searchbar-input"
                 aria-label="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <Button variant="searchbar-button">Search</Button>
+              <Button variant="searchbar-button" onClick={handleSearch}>
+                Search
+              </Button>
             </Form>
+            {searchResult.length > 0 && (
+              <div className="search-results">
+                {searchResult.map((product) => (
+                  <div key={product._id} className="search-result-item">
+                    <Link to={`/product/${product._id}`}>
+                      {product.name} - €{product.price.toFixed(2)}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           {/* profile and shopping bag */}
           {/* <div className="me-auto">

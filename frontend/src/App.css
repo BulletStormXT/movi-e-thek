@@ -431,28 +431,23 @@ a:active {
 
 .price {
   font-size: 25px !important;
-  /* font-weight: bold; */
-  vertical-align: super;
+  vertical-align: super !important;
   margin: 0 !important;
   padding-bottom: 5px !important;
 }
 
 .a-price-whole {
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
-/* .a-price-decimal {
-  font-size: 15px;
-} */
-
 .a-price-fraction {
-  font-size: 17.5px;
-  vertical-align: super;
+  font-size: 17.5px !important;
+  vertical-align: super !important;
 }
 
 .a-price-symbol {
-  font-size: 17.5px;
-  vertical-align: super;
+  font-size: 17.5px !important;
+  vertical-align: super !important;
 }
 
 /* UserProfile */
@@ -670,7 +665,7 @@ a:active {
 }
 
 .udash-search img {
-  max-width: 200px;
+  max-width: 350px;
   border-radius: 10px !important;
   height: 300px;
 }
