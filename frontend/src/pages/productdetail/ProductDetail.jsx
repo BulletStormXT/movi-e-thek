@@ -4,29 +4,44 @@ import { useParams } from "react-router-dom";
 const ProductDetail = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  //needs styling, fetches product data from the backend
+
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProductAndMovie = async () => {
       try {
-        const response = await fetch(
+        // Fetch product data
+        const productResponse = await fetch(
           `http://localhost:3001/api/products/${productId}`
         );
-        if (!response.ok) {
+        if (!productResponse.ok) {
           throw new Error("Failed to fetch product data");
         }
-        const data = await response.json();
-        setProduct(data);
+        const productData = await productResponse.json();
+        setProduct(productData);
+
+        // Fetch movie data based on product name
+        const movieResponse = await fetch(
+          `http://localhost:3001/api/movies/movie/title/${encodeURIComponent(
+            productData.name
+          )}`
+        );
+        if (!movieResponse.ok) {
+          throw new Error("Failed to fetch movie data");
+        }
+        const movieData = await movieResponse.json();
+        setMovie(movieData);
+
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching product data:", error);
-        setError("Failed to fetch product data. Please try again later.");
+        console.error("Error fetching data:", error);
+        setError("Failed to fetch data. Please try again later.");
         setLoading(false);
       }
     };
 
-    fetchProduct();
+    fetchProductAndMovie();
   }, [productId]);
 
   if (loading) {
@@ -37,11 +52,15 @@ const ProductDetail = () => {
     return <p>{error}</p>;
   }
 
-  if (!product) {
-    return <p>No product data available.</p>;
+  if (!product || !movie) {
+    return <p>No data available.</p>;
   }
 
   const { name, image, category, description, price } = product;
+
+  const { Year, Released, Genre, Director, Actors, Plot, Awards, imdbRating } =
+    movie;
+
   const formattedPrice = price.toFixed(2);
 
   return (
@@ -59,6 +78,36 @@ const ProductDetail = () => {
       <p className="price">
         <strong>Price:</strong> {formattedPrice} €
       </p>
+      <div className="movie-detail">
+        <h3>Movie Details</h3>
+        <p>
+          <strong>Title:</strong> {movie.Title}
+        </p>
+        <p>
+          <strong>Year:</strong> {Year}
+        </p>
+        <p>
+          <strong>Released:</strong> {Released}
+        </p>
+        <p>
+          <strong>Genre:</strong> {Genre}
+        </p>
+        <p>
+          <strong>Director:</strong> {Director}
+        </p>
+        <p>
+          <strong>Actors:</strong> {Actors}
+        </p>
+        <p>
+          <strong>Plot:</strong> {Plot}
+        </p>
+        <p>
+          <strong>Awards:</strong> {Awards}
+        </p>
+        <p>
+          <strong>IMDb Rating:</strong> {imdbRating}
+        </p>
+      </div>
     </div>
   );
 };

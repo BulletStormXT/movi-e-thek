@@ -36,15 +36,30 @@ const UserCart = () => {
     );
   };
 
-  const deleteItem = (_id) => {
-    setCart(cart.filter((item) => item._id !== _id));
-    setTotal(
-      cart.reduce(
-        (acc, item) =>
-          acc + (item._id !== _id ? item.quantity * item.product.price : 0),
-        0
-      )
-    );
+  const deleteItem = async (_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/cart/users/${localStorage.getItem(
+          "userId"
+        )}/cart/${_id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setCart(cart.filter((item) => item._id !== _id));
+      setTotal(
+        cart.reduce(
+          (acc, item) =>
+            acc + (item._id !== _id ? item.quantity * item.product.price : 0),
+          0
+        )
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
