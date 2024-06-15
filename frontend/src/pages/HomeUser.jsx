@@ -30,6 +30,30 @@ const HomeUser = () => {
   //   console.log("Invalid User");
   // }
 
+  //add to cart logic
+  const addToCart = async (productId, quantity = 1) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/cart/users/${localStorage.getItem(
+          "userId"
+        )}/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, quantity }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      navigate("/cart");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="prodText">
       {/* <h1>Home</h1> */}
@@ -74,7 +98,7 @@ const HomeUser = () => {
                       </button>
                       <button
                         className="add2SC"
-                        onClick={() => navigate("/cart")}
+                        onClick={() => addToCart(product._id)}
                       >
                         Add to Shopping Cart
                       </button>

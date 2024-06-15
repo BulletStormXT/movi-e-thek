@@ -63,16 +63,20 @@ exports.removeCartItem = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    const cartItem = user.cart.id(cartItemId);
-    if (!cartItem) {
+    // Find the index of the cart item in the user's cart array
+    const index = user.cart.findIndex((item) => item._id.equals(cartItemId));
+    if (index === -1) {
       return res.status(404).send("Cart item not found");
     }
 
-    cartItem.remove();
+    // Remove the cart item at the found index
+    user.cart.splice(index, 1);
     await user.save();
-    res.send(user.cart);
+
+    res.send(user.cart); // Send updated cart after deletion
   } catch (error) {
-    res.status(400).send(error);
+    console.error("Error deleting cart item:", error);
+    res.status(500).send("Error deleting cart item");
   }
 };
 
