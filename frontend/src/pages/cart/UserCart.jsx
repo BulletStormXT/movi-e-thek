@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 
 const UserCart = () => {
   const [cart, setCart] = useState([]);
@@ -54,6 +54,119 @@ const UserCart = () => {
         cart.reduce(
           (acc, item) =>
             acc + (item._id !== _id ? item.quantity * item.product.price : 0),
+          0
+        )
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  return (
+    <div className="cart-body">
+      {cart.map((item) => (
+        <div key={item._id} className="cart-card">
+          <div className="cart-card-image-box">
+            <img
+              src={item.product.image}
+              alt={item.product.name}
+              title={item.product.name}
+              className="cart-card-image"
+            />
+          </div>
+          <div>
+            <h4>{item.product.name}</h4>
+            <input
+              type="number"
+              min="1"
+              max="10"
+              value={item.quantity}
+              onChange={(e) => updateQuantity(item._id, e.target.value)}
+            />
+            <button onClick={() => deleteItem(item._id)}>Löschen</button>
+          </div>
+        </div>
+      ))}
+      <h3>Gesamtpreis: {total}</h3>
+    </div>
+  );
+};
+
+export default UserCart;
+ */
+
+import React, { useState, useEffect } from "react";
+
+const UserCart = () => {
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/cart/users/${localStorage.getItem(
+            "userId"
+          )}/cart`
+        );
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+          setCart(data);
+          setTotal(
+            data.reduce(
+              (acc, item) => acc + item.product.price * item.quantity,
+              0
+            )
+          );
+        } else {
+          setCart([]);
+          setTotal(0);
+          console.error("Fetched data is not an array:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      }
+    };
+
+    fetchCart();
+  }, []);
+
+  const updateQuantity = (_id, quantity) => {
+    setCart(
+      cart.map((item) =>
+        item._id === _id ? { ...item, quantity: Number(quantity) } : item
+      )
+    );
+    setTotal(
+      cart.reduce(
+        (acc, item) =>
+          acc +
+          (item._id === _id ? Number(quantity) : item.quantity) *
+            item.product.price,
+        0
+      )
+    );
+  };
+
+  const deleteItem = async (_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/cart/users/${localStorage.getItem(
+          "userId"
+        )}/cart/${_id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const newCart = cart.filter((item) => item._id !== _id);
+      setCart(newCart);
+      setTotal(
+        newCart.reduce(
+          (acc, item) => acc + item.quantity * item.product.price,
           0
         )
       );
