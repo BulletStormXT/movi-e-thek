@@ -170,7 +170,7 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand className="sidar" href="#home">
-          {token ? `Hallo ${localStorage.getItem("name")}!` : "Please Login!"}
+          {token ? `Hello ${localStorage.getItem("name")}!` : "Please Login!"}
         </Navbar.Brand>
         <Nav className="ml-auto">
           {token ? (

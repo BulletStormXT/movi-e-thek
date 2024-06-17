@@ -48,7 +48,7 @@ const HomeUser = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      navigate("/cart");
+      navigate("/user/cart");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -62,6 +62,7 @@ const HomeUser = () => {
         <div className="containerProduct">
           {products.map((product) => {
             const [whole, fraction] = product.price.toFixed(2).split(".");
+
             // link to user established
             return (
               <div key={product._id}>
@@ -98,7 +99,9 @@ const HomeUser = () => {
                       </button>
                       <button
                         className="add2SC"
-                        onClick={() => addToCart(product._id)}
+                        onClick={() => 
+                          addToCart(product._id)
+                        }
                       >
                         Add to Shopping Cart
                       </button>

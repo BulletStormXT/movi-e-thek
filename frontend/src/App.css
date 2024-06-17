@@ -669,3 +669,62 @@ a:active {
   border-radius: 10px !important;
   height: 300px;
 }
+
+/* Detail */
+
+.contProd-det {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left {
+  flex: 1;
+  padding-right: 20px;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.left img {
+  max-width: 350px;
+  height: auto;
+}
+
+.middle {
+  flex: 2;
+  padding: 20px;
+  text-align: left !important;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.buy-now {
+  margin-top: 5px;
+  background-color: #b1bac5;
+  color: #4b719c;
+  border-radius: 5px !important;
+  border: none !important;
+}
+
+.mid-b {
+  padding-top: 30px !important;
+}
+
+.details p {
+  text-align: start;
+}
+
+.rmv {
+  margin-top: 5px;
+  margin-left: 5px;
+  background-color: #b1bac5;
+  color: #4b719c;
+  border-radius: 5px !important;
+  border: none !important;
+}

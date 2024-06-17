@@ -175,6 +175,8 @@ const UserCart = () => {
     }
   };
 
+  const [whole, fraction] = total.toFixed(2).split(".");
+
   return (
     <div className="cart-body">
       {cart.map((item) => (
@@ -196,11 +198,18 @@ const UserCart = () => {
               value={item.quantity}
               onChange={(e) => updateQuantity(item._id, e.target.value)}
             />
-            <button onClick={() => deleteItem(item._id)}>Löschen</button>
+            <button className="rmv" onClick={() => deleteItem(item._id)}>
+              Remove
+            </button>
           </div>
         </div>
       ))}
-      <h3>Gesamtpreis: {total}</h3>
+      <h3 className="total-price">
+        Total price: <span className="a-price-whole">{whole}</span>
+        <span className="a-price-decimal"></span>
+        <span className="a-price-fraction">{fraction}</span>
+        <span className="a-price-symbol"> €</span>
+      </h3>
     </div>
   );
 };

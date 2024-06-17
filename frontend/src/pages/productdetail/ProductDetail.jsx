@@ -79,61 +79,90 @@ const ProductDetail = () => {
     return <p>No data available.</p>;
   }
 
-  const { name, image, category, description, price } = product;
+  const { name, image, price } = product;
 
-  const { Year, Released, Genre, Director, Actors, Plot, Awards, imdbRating } =
-    movie;
+  const {
+    Released,
+    Genre,
+    Runtime,
+    Director,
+    Actors,
+    Plot,
+    Country,
+    BoxOffice,
+    Awards,
+    imdbRating,
+  } = movie;
 
-  const formattedPrice = price.toFixed(2);
+  const [whole, fraction] = product.price.toFixed(2).split(".");
 
   return (
-    <div className="prod-detail">
-      <h2>{name}</h2>
-      <div className="product-image">
+    <div className="contProd-det">
+      <div className="left">
         <img src={image} alt={name} />
       </div>
-      <p>
+      {/* <p>
         <strong>Category:</strong> {category}
       </p>
       <p>
         <strong>Description:</strong> {description}
-      </p>
-      <p className="price">
-        <strong>Price:</strong> {formattedPrice} €
-      </p>
-      <div className="movie-detail">
-        <h3>Movie Details</h3>
-        <p>
-          <strong>Title:</strong> {movie.Title}
-        </p>
-        <p>
+      </p> */}
+      <div className="middle">
+        <h2>{name}</h2>
+        <div className="movie-detail mid-t">
+          {/* <h3>Movie Details</h3> */}
+          {/* <p>
+            <strong>Title:</strong> {movie.Title}
+          </p> */}
+          <div className="details mid-b">
+            <p>
+              <strong>Released:</strong> {Released}
+            </p>
+            <p>
+              <strong>Genre:</strong> {Genre}
+            </p>
+            <p>
+              <strong>Runtime:</strong> {Runtime}
+            </p>
+            <p>
+              <strong>Director:</strong> {Director}
+            </p>
+            <p>
+              <strong>Actors:</strong> {Actors}
+            </p>
+            <p>
+              <strong>Plot:</strong> {Plot}
+            </p>
+            <p>
+              <strong>Filming Locations:</strong> {Country}
+            </p>
+            <p>
+              <strong>Box office(Domestic):</strong> {BoxOffice}
+            </p>
+            <p>
+              <strong>Awards:</strong> {Awards}
+            </p>
+            <p>
+              <strong>IMDb Rating:</strong> {imdbRating}
+            </p>
+          </div>
+          {/* <p>
           <strong>Year:</strong> {Year}
-        </p>
-        <p>
-          <strong>Released:</strong> {Released}
-        </p>
-        <p>
-          <strong>Genre:</strong> {Genre}
-        </p>
-        <p>
-          <strong>Director:</strong> {Director}
-        </p>
-        <p>
-          <strong>Actors:</strong> {Actors}
-        </p>
-        <p>
-          <strong>Plot:</strong> {Plot}
-        </p>
-        <p>
-          <strong>Awards:</strong> {Awards}
-        </p>
-        <p>
-          <strong>IMDb Rating:</strong> {imdbRating}
-        </p>
+        </p> */}
+        </div>
       </div>
-      <button className="add2SC" onClick={() => addToCart(product._id)}>
-        Add to Cart
-      </button>
+      <div className="right">
+        <p className="price">
+          <span className="a-price-whole">{whole}</span>
+          <span className="a-price-decimal"></span>
+          <span className="a-price-fraction">{fraction}</span>
+          <span className="a-price-symbol"> €</span>
+        </p>
+        <button className="add2SC" onClick={() => addToCart(product._id)}>
+          Add to Cart
+        </button>
+        <button className="buy-now">Buy Now</button>
+      </div>
     </div>
   );
 };
