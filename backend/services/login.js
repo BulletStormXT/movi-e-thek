@@ -1,4 +1,4 @@
-const bycript = require("bcrypt");
+const bycript = require("bcryptjs");
 const User = require("../models/user");
 const generateToken = require("../utils/jwtUtils").generateToken;
 
