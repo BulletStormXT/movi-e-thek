@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import StarRating from "./StarRating";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -66,6 +67,8 @@ const ProductDetail = () => {
       console.error("Error:", error);
     }
   };
+
+  
 
   if (loading) {
     return <p>Loading...</p>;
@@ -145,6 +148,7 @@ const ProductDetail = () => {
             <p>
               <strong>IMDb Rating:</strong> {imdbRating}
             </p>
+            <StarRating rating={imdbRating} />
           </div>
           {/* <p>
           <strong>Year:</strong> {Year}

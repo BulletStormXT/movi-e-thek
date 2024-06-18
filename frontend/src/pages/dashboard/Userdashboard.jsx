@@ -147,6 +147,85 @@ import React, { useState, useEffect, useCallback } from "react";
 import debounce from "lodash.debounce";
 import { Link } from "react-router-dom";
 
+  // POST request to add to cart
+  const addToUDash = async (userId, product) => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/${userId}/cart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  }
+
+  //  PATCH request to update cart item
+const updateCartItem = async (userId, cartItemId, updatedItem) => {
+  try {
+    const response = await fetch(`http://localhost:3001/users/${userId}/cart/${cartItemId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedItem),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating cart item:", error);
+  }
+};
+
+// DELETE request to remove cart item
+const removeUDashItem = async (userId, cartItemId) => {
+  try {
+    const response = await fetch(`http://localhost:3001/users/${userId}/cart/${cartItemId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error removing cart item:", error);
+  }
+};
+
+// GET request to get cart items
+const getCartItems = async (userId) => {
+  try {
+    const response = await fetch(`http://localhost:3001/users/${userId}/cart`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error getting cart items:", error);
+  }
+};
+
+// handlesubmit missing???
+
 const UserDashboard = () => {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
@@ -173,6 +252,7 @@ const UserDashboard = () => {
     []
   );
 
+
   useEffect(() => {
     debouncedFetchMovies(search);
     return () => {
@@ -197,11 +277,11 @@ const UserDashboard = () => {
               movie.category.toLowerCase().includes(search.toLowerCase())) && (
               <div className="udash-res-cont" key={movie._id}>
                 <div className="udash-res">
-                  <Link to={`/movies/${movie._id}`} state={{ movie }}>
-                    <h4>{movie.name}</h4>
+                  <Link to={`/product/${movie._id}`} state={{ movie }}>
+                    <h3>{movie.name}</h3>
                     <img src={movie.image} alt={movie.name} />
-                    <p>Category: {movie.category}</p>
-                    <p>{movie.description}</p>
+                    <p>Genre: {movie.category}</p>
+                    {/* <p>{movie.description}</p> */}
                     <p className="price">
                       <span className="a-price-whole">{whole}</span>
                       <span className="a-price-decimal"></span>
