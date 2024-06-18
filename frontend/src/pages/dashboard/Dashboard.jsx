@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Table } from "react-bootstrap";
 import { FaRegTrashAlt } from "react-icons/fa";
+
 function Dashboard() {
   const token = localStorage.getItem("token");
   const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  // Kontrolle, ob es sich um einen Admin handelt
+  // Function to fetch list of products
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/products", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      setProducts(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // Kontrolle ob es sich um einen Admin handelt
   useEffect(() => {
     const role = localStorage.getItem("role");
 
@@ -17,29 +34,9 @@ function Dashboard() {
       );
       navigate("/user/dashboard"); // navigate to a different page, e.g., home page
     }
-  }, []);
+  }, [navigate]);
 
-  const handleDelete = async (id) => {
-    try {
-      await fetch(`http://localhost:3001/api/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const response = await fetch(`http://localhost:3001/api/user`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  // Fetch list of users on component mount or token change
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -61,6 +58,38 @@ function Dashboard() {
       navigate("/login");
     }
   }, [token, navigate]);
+
+  // Fetch list of products on component mount
+  useEffect(() => {
+    if (token) {
+      fetchProducts();
+    }
+  }, [token]);
+
+  // Function to handle product deletion
+  const handleDelete = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/products/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        // Successful deletion, update products list
+        fetchProducts();
+      } else {
+        throw new Error("Failed to delete product");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -74,7 +103,7 @@ function Dashboard() {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +117,7 @@ function Dashboard() {
                   <FaRegTrashAlt
                     onClick={() => handleDelete(user._id)}
                     style={{ cursor: "pointer" }}
-                  ></FaRegTrashAlt>
+                  />
                 </td>
               </tr>
             ))}
@@ -106,14 +135,40 @@ function Dashboard() {
               <th>#</th>
               <th>Name</th>
               <th>Price</th>
-              <th>description</th>
-              <th>category</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Category</th>
+              <th>Action</th>
             </tr>
-            {/* add product content here */}
           </thead>
+          <tbody>
+            {products.map((product, index) => (
+              <tr key={product._id}>
+                <td>{index + 1}</td>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+                <td>{product.description}</td>
+                <td>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
+                </td>
+                <td>{product.category}</td>
+                <td>
+                  <FaRegTrashAlt
+                    onClick={() => handleDelete(product._id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </Table>
       </Container>
     </>
   );
 }
+
 export default Dashboard;
