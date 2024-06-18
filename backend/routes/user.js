@@ -17,7 +17,11 @@ router.get("/user", authMiddleware.authenticateToken, userController.getUsers);
 //     userController.updateUser
 //   )
 //   ;
-
+router.patch(
+  "/user/:id",
+  authMiddleware.authenticateToken,
+  userController.updateUser
+);
 const deleteUserById = async (req, res) => {
   try {
     const userID = req.params.id;
