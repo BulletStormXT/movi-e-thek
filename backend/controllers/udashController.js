@@ -16,45 +16,42 @@ exports.addToudash = async (req, res) => {
       return res.status(404).send("Product not found");
     }
 
+    // Check if the product is already in the user's udash
+    if (!user.udash.includes(productId)) {
+      user.udash.push(productId);
+      await user.save();
+    }
 
-    // ? Check if the product is already in the user's udash
-    // const udashItem = user.udash.find((item) => item.product.equals(productId));
-    // if (udashItem) {
-    //   udashItem.quantity += quantity;
-    // } else {
-    //   user.udash.push({ product: productId, quantity });
-    // }
-
-    await user.save();
     res.status(201).send(user.udash);
   } catch (error) {
     res.status(400).send(error);
   }
 };
 
-//? Update the quantity of a udash item
-// exports.updateCartItem = async (req, res) => {
-//   const userId = req.params.userId;
-//   const { cartItemId, quantity } = req.body;
+exports.updateudashItem = async (req, res) => {
+  const userId = req.params.userId;
+  const { udashItemId } = req.params;
+  const { newData } = req.body;
 
-//   try {
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(404).send("User not found");
-//     }
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
 
-//     const cartItem = user.cart.id(cartItemId);
-//     if (!cartItem) {
-//       return res.status(404).send("Cart item not found");
-//     }
+    const udashItem = user.udash.id(udashItemId);
+    if (!udashItem) {
+      return res.status(404).send("Dashboard item not found");
+    }
 
-//     cartItem.quantity = quantity;
-//     await user.save();
-//     res.send(user.cart);
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// };
+    // Update the necessary fields
+    Object.assign(udashItem, newData);
+    await user.save();
+    res.send(user.udash);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
 exports.removeudashItem = async (req, res) => {
   const userId = req.params.userId;
@@ -66,14 +63,8 @@ exports.removeudashItem = async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    // Find the index of the udash item in the user's udash array
-    const index = user.udash.findIndex((item) => item._id.equals(udashItemId));
-    if (index === -1) {
-      return res.status(404).send("Dashboard item not found");
-    }
-
-    // Remove the udash item at the found index
-    user.udash.splice(index, 1);
+    // Remove the udash item
+    user.udash = user.udash.filter((item) => !item.equals(udashItemId));
     await user.save();
 
     res.send(user.udash); // Send updated udash after deletion
@@ -87,7 +78,7 @@ exports.getudashItems = async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    const user = await User.findById(userId).populate("udash.product");
+    const user = await User.findById(userId).populate("udash");
     if (!user) {
       return res.status(404).send("User not found");
     }

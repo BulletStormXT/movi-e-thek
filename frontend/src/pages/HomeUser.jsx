@@ -4,10 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 const HomeUser = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
   const role = localStorage.getItem("role");
   const isLoggedIn = role === "user";
 
@@ -23,12 +19,29 @@ const HomeUser = () => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  //   doesn't work now
-  // if (formData.role === "user") {
-  //   navigate("/user");
-  // } else {
-  //   console.log("Invalid User");
-  // }
+  //add to dashboard logic
+  const addToDashboard = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/udash/users/${localStorage.getItem(
+          "userId"
+        )}/udash`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      navigate("/user/dashboard");
+    } catch (error) {
+      console.error("Error adding to dashboard:", error);
+    }
+  };
 
   //add to cart logic
   const addToCart = async (productId, quantity = 1) => {
@@ -50,7 +63,7 @@ const HomeUser = () => {
       }
       navigate("/user/cart");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error adding to cart:", error);
     }
   };
 
@@ -90,18 +103,15 @@ const HomeUser = () => {
 
                   {isLoggedIn && (
                     <>
-                      {" "}
                       <button
                         className="add2Db"
-                        onClick={() => navigate("/user/dashboard")}
+                        onClick={() => addToDashboard(product._id)}
                       >
                         Add to Dashboard
                       </button>
                       <button
                         className="add2SC"
-                        onClick={() => 
-                          addToCart(product._id)
-                        }
+                        onClick={() => addToCart(product._id)}
                       >
                         Add to Shopping Cart
                       </button>

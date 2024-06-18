@@ -1,3 +1,4 @@
+const { Schema } = require("mongoose");
 const mongoose = require("../configuration/dbConfig");
 const cartItemSchema = new mongoose.Schema({
   product: {
@@ -13,6 +14,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   cart: [cartItemSchema],
+  udash: [{ type: Schema.Types.ObjectId, ref: "Product" }],
   role: {
     type: String,
     enum: ["user", "admin"],
