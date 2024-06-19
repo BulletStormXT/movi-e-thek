@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Finlandica&display=swap");
 
+@import "~react-datepicker/dist/react-datepicker.css";
+
 .App {
   text-align: center;
 }
@@ -45,10 +47,6 @@ body {
   color: #b1bac5 !important;
   /* height: 100vh; */
   /* margin-bottom: 20px; */
-}
-
-p {
-  color: #b1bac5;
 }
 
 h3 {
@@ -214,6 +212,7 @@ form button:hover {
 p {
   font-size: 0.9rem;
   text-align: center;
+  color: #b1bac5;
 }
 
 p a {
@@ -460,12 +459,6 @@ a:active {
 
 /* UserProfile */
 
-.profile-container {
-  display: flex;
-  align-items: center;
-  margin: 30px;
-}
-
 /* .profile-picture {
   width: 150px;
   height: 150px;
@@ -475,7 +468,6 @@ a:active {
 
 .ppph-frame {
   background-color: #001126 !important;
-  box-shadow: 0 4px 8px rgba(0, 30, 71, 0.5) !important;
   color: #b1bac5 !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.75) !important;
   width: 300px;
@@ -529,9 +521,9 @@ a:active {
   margin-right: auto;
 }
 
-.text-container {
+/* .text-container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.75) !important;
-}
+} */
 
 .username {
   background: linear-gradient(
@@ -753,6 +745,138 @@ a:active {
 .star-rating {
   display: flex;
   gap: 5px;
-font-size: 50px;
-color: #8000ff;
+  font-size: 20px;
+  color: #8000ff;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.rating-wrapper p {
+  marginright: "10px" !important;
+}
+
+/* UserProfile *NEW* */
+
+.profile-page {
+  display: flex;
+  gap: 20px;
+}
+
+.profile-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin: 30px;
+}
+
+.left-container {
+  width: 30%;
+}
+
+.right-container {
+  width: 65%;
+}
+
+.profile-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-info h2 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-links li {
+  margin: 10px 0;
+}
+
+.profile-links a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.profile-links a:hover {
+  text-decoration: underline;
+}
+
+.right-container form > div {
+  margin-bottom: 15px;
+}
+
+.right-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.right-container input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.right-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.right-container button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.right-container button[type="button"] {
+  background-color: #ccc;
+  margin-left: 10px;
+}
+
+/* DATE PICKER */
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker {
+  font-family: "Finlandica", Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.react-datepicker__header {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+  color: #007bff;
 }

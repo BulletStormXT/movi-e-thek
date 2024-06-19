@@ -68,8 +68,6 @@ const ProductDetail = () => {
     }
   };
 
-  
-
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -145,10 +143,12 @@ const ProductDetail = () => {
             <p>
               <strong>Awards:</strong> {Awards}
             </p>
-            <p>
-              <strong>IMDb Rating:</strong> {imdbRating}
-            </p>
-            <StarRating rating={imdbRating} />
+            <div className="rating-wrapper">
+              <p>
+                <strong>IMDb Rating:</strong> {imdbRating}
+              </p>
+              <StarRating rating={imdbRating} />
+            </div>
           </div>
           {/* <p>
           <strong>Year:</strong> {Year}

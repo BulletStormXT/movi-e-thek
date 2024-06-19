@@ -26,7 +26,6 @@ const StarRating = ({ rating }) => {
 
 export default StarRating; */
 
-
 /* import React from "react";
 import { GiSkull, GiSkullCrossedBones } from "react-icons/gi";
 
@@ -54,34 +53,29 @@ const StarRating = ({ rating }) => {
 
 export default StarRating; */
 
-
 import React from "react";
 import { WiMoonFull, WiMoonNew, WiMoonAltFirstQuarter } from "react-icons/wi";
 
-
-
 const StarRating = ({ rating }) => {
-    const fullMoon = Math.floor(rating / 2);
-    const halfMoon = rating % 2 >= 1 ? 1 : 0;
-    const emptyMoon = 5 - fullMoon - halfMoon;
+  const fullMoon = Math.floor(rating / 2);
+  const halfMoon = rating % 2 >= 1 ? 1 : 0;
+  const emptyMoon = 5 - fullMoon - halfMoon;
 
-            return (
-                <div className='star-rating'>
-                {Array(fullMoon)
-                    .fill()
-                    .map((_, index) => (
-                        <WiMoonFull key={index} />                    
-                    ))}
-                {halfMoon === 1 && <WiMoonAltFirstQuarter key="halfMoon" />}
-                {Array(emptyMoon)
-                    .fill()
-                    .map((_, index) => (
-                      <WiMoonNew key={index} />
-                    ))}
-                </div>
-    );
+  return (
+    <div className="star-rating">
+      {Array(fullMoon)
+        .fill()
+        .map((_, index) => (
+          <WiMoonFull key={index} />
+        ))}
+      {halfMoon === 1 && <WiMoonAltFirstQuarter key="halfMoon" />}
+      {Array(emptyMoon)
+        .fill()
+        .map((_, index) => (
+          <WiMoonNew key={index} />
+        ))}
+    </div>
+  );
 };
 
 export default StarRating;
-
-
