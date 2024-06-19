@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Table } from "react-bootstrap";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -10,7 +10,8 @@ function Dashboard() {
   const navigate = useNavigate();
 
   // Function to fetch list of products
-  const fetchProducts = async () => {
+  // Funktion in useCallback einwickeln
+  const fetchProducts = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:3001/api/products", {
         headers: {
@@ -22,7 +23,7 @@ function Dashboard() {
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }, [token]); // Abhängigkeiten für useCallback
 
   // Kontrolle ob es sich um einen Admin handelt
   useEffect(() => {
@@ -64,7 +65,7 @@ function Dashboard() {
     if (token) {
       fetchProducts();
     }
-  }, [token]);
+  }, [token, fetchProducts]);
 
   // Function to handle product deletion
   const handleDelete = async (productId) => {
