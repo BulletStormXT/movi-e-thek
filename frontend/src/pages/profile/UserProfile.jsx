@@ -3,6 +3,12 @@ import DatePicker from "react-datepicker"; // npm install react-datepicker date-
 import "react-datepicker/dist/react-datepicker.css";
 import { format, parseISO } from "date-fns"; // npm install date-fns
 
+const phonePrefixes = [
+  { country: "Germany", prefix: "+49 (0)" },
+  { country: "Hell", prefix: "+666 (0)" },
+  { country: "Heaven", prefix: "+777 (0)" },
+];
+
 const fetchUserData = () => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
@@ -45,6 +51,8 @@ const UserProfile = () => {
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState(null);
 
+  const [selectedPrefix, setSelectedPrefix] = useState("");
+
   // Fetch user data when component mounts
   useEffect(() => {
     fetchUserData()
@@ -72,7 +80,7 @@ const UserProfile = () => {
       firstName,
       lastName,
       email,
-      phone,
+      phone: `${selectedPrefix}${phone}`,
       birthDate: formattedBirthDate,
     })
       .then((updatedData) => {
@@ -93,7 +101,15 @@ const UserProfile = () => {
       <div className="profile-container-l left-container">
         <div className="profImgI">
           <div className="profile-image">
-            <img src={userData.profilePicture} alt="Profile" />
+            {userData.profilePicture ? (
+              <img src={userData.profilePicture} alt="Profile" />
+            ) : (
+              <div
+                style={{ width: "100%", height: "100%", borderRadius: "15px" }}
+              >
+                <span>Profile Picture Placeholder</span>
+              </div>
+            )}
           </div>
           <div className="profile-info">
             <h2>
@@ -103,14 +119,20 @@ const UserProfile = () => {
         </div>
         <div className="profile-links">
           <ul>
-            <li>
+            <li className="profile-link">
               <a href="#orders">My Orders</a>
             </li>
-            <li>
+            <li className="profile-link">
+              <a href="#settings">Wishlist</a>
+            </li>
+            <li className="profile-link">
               <a href="#wallet">My Wallet</a>
             </li>
-            <li>
+            <li className="profile-link">
               <a href="#settings">Settings</a>
+            </li>
+            <li className="profile-link">
+              <a href="#settings">Support</a>
             </li>
           </ul>
         </div>
@@ -131,7 +153,7 @@ const UserProfile = () => {
             <strong>Email:</strong> {email}
           </p>
           <p>
-            <strong>Phone:</strong> {phone}
+            <strong>Phone:</strong> {`${selectedPrefix} ${phone}`}
           </p>
           <p>
             <strong>Birth Date:</strong>{" "}
@@ -176,14 +198,27 @@ const UserProfile = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div>
+              <div className="phone-coantainer">
                 <label htmlFor="phone">Phone Number:</label>
-                <input
-                  type="text"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
+                <div className="phone-input">
+                  <select
+                    id="phonePrefix"
+                    value={selectedPrefix}
+                    onChange={(e) => setSelectedPrefix(e.target.value)}
+                  >
+                    {phonePrefixes.map((prefix, index) => (
+                      <option key={index} value={prefix.prefix}>
+                        {prefix.country}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
               </div>
               <div>
                 <label htmlFor="birthDate">Birth Date:</label>
@@ -195,8 +230,10 @@ const UserProfile = () => {
                   placeholderText="dd/MM/yyyy"
                 />
               </div>
-              <button type="submit">Save</button>
-              <button type="button">Cancel</button>
+              <div className="change-button">
+                <button type="submit">Save</button>
+                <button type="button">Cancel</button>
+              </div>
             </div>
           </form>
         </div>
