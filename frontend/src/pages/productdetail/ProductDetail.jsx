@@ -109,6 +109,7 @@ const ProductDetail = () => {
         <strong>Description:</strong> {description}
       </p> */}
       <div className="middle">
+        {/* <div className="mid-cont"> */}
         <h2>{name}</h2>
         <div className="movie-detail mid-t">
           {/* <h3>Movie Details</h3> */}
@@ -131,7 +132,7 @@ const ProductDetail = () => {
             <p>
               <strong>Actors:</strong> {Actors}
             </p>
-            <p>
+            <p className="plot">
               <strong>Plot:</strong> {Plot}
             </p>
             <p>
@@ -153,6 +154,7 @@ const ProductDetail = () => {
           {/* <p>
           <strong>Year:</strong> {Year}
         </p> */}
+          {/* </div> */}
         </div>
       </div>
       <div className="right">

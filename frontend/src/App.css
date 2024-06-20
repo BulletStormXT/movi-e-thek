@@ -373,6 +373,7 @@ a:active {
 
 .searchbar {
   display: flex;
+  position: relative;
   /* height: 20px !important; */
   justify-content: center;
   align-items: center;
@@ -426,7 +427,7 @@ a:active {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #113258;
+  background: #ff00dd;
   border-radius: 12px;
 }
 
@@ -687,15 +688,16 @@ a:active {
 
 .contProd-det {
   display: flex;
+  gap: 50px;
   justify-content: space-between;
   padding: 20px;
 }
 
 .left {
   flex: 1;
-  padding-right: 20px;
-  padding-left: 30px;
-  padding-top: 30px;
+  border: 1px solid #8000ff;
+  padding: 30px 30px;
+  border-radius: 15px;
 }
 
 .left img {
@@ -703,18 +705,62 @@ a:active {
   height: auto;
 }
 
+.mid-b {
+  padding-top: 30px !important;
+}
+
+/* .mid-cont {
+  z-index: 200;
+} */
+
 .middle {
   flex: 2;
-  padding: 20px;
+  padding: 30px;
   text-align: left !important;
+  border: 1px solid #8000ff;
+  border-radius: 15px;
 }
+
+/* .middle {
+  position: relative;
+  border-radius: 15px;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, #8000ff, #00fff7) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.middle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  padding: 10px;
+  background: linear-gradient(180deg, #8000ff, #00fff7) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+} */
+
+/* .middle {
+  flex: 2;
+  padding: 30px;
+  text-align: left !important;
+  border-width: 10px;
+  border-style: solid;
+  border-radius: 15px;
+  border-image: linear-gradient(#8000ff, #00fff7) 1;
+} */
 
 .right {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-top: 20px;
+  border: 1px solid #8000ff;
+  padding: 20px 30px;
+  border-radius: 15px;
 }
 
 .buy-now {
@@ -725,12 +771,13 @@ a:active {
   border: none !important;
 }
 
-.mid-b {
-  padding-top: 30px !important;
-}
-
 .details p {
   text-align: start;
+  margin-bottom: 5px !important;
+}
+
+.plot {
+  width: 600px !important;
 }
 
 .rmv {
@@ -742,20 +789,23 @@ a:active {
   border: none !important;
 }
 
-.star-rating {
-  display: flex;
-  gap: 5px;
-  font-size: 20px;
-  color: #8000ff;
-}
-
 .rating-wrapper {
+  padding-top: 15px;
   display: flex;
+  gap: 15px;
   align-items: center;
 }
 
 .rating-wrapper p {
-  margin-right: 10px !important;
+  margin: 0;
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+  font-size: 15px;
+  color: #8000ff;
+  /* margin-left: 15px; */
 }
 
 /* UserProfile *NEW* */
@@ -765,32 +815,64 @@ a:active {
   gap: 20px;
 }
 
-.profile-container {
-  border: 1px solid #ccc;
+.profile-container-l {
+  border: 1px solid #8000ff;
+  padding: 20px;
+  border-radius: 10px;
+  align-items: center;
+  margin: 30px;
+  width: 30%;
+}
+
+.profile-container-r {
+  border: 1px solid #8000ff;
   padding: 20px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   margin: 30px;
-}
-
-.left-container {
-  width: 30%;
-}
-
-.right-container {
   width: 65%;
 }
 
+.user-info {
+  border: 1px solid #8000ff;
+}
+
+.update-info {
+  border: 1px solid #8000ff;
+}
+
+.profile-info {
+  border: 1px solid #8000ff;
+}
+
+.profImgI {
+  border: 1px solid #8000ff;
+  margin-bottom: 20px;
+}
+
 .profile-image img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 350px;
+  height: 350px;
+  border: 1px solid #8000ff;
+  border-radius: 15px;
+  margin-bottom: 350px;
+  position: relative;
+  background: linear-gradient(
+    0deg,
+    rgba(152, 150, 255, 0.05) 0%,
+    rgba(0, 55, 82, 0) 25%
+  ) !important;
+  background-color: #131439 !important;
 }
 
 .profile-info h2 {
   text-align: center;
   margin-top: 10px;
+}
+
+.profile-links {
+  border: 1px solid #8000ff;
 }
 
 .profile-links ul {
@@ -885,10 +967,6 @@ a:active {
 
 .main-navbar {
   background-color: #ffffff;
-}
-
-.searchbar {
-  position: relative;
 }
 
 .search-results {

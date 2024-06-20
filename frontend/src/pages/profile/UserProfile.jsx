@@ -38,6 +38,7 @@ const updateUserData = (userId, updates) => {
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
+  const [name, setName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,6 +51,7 @@ const UserProfile = () => {
       .then((data) => {
         setUserData(data);
         // Set initial form values from fetched data
+        setName(data.name || "");
         setFirstName(data.firstName || "");
         setLastName(data.lastName || "");
         setEmail(data.email || "");
@@ -66,6 +68,7 @@ const UserProfile = () => {
     const formattedBirthDate = birthDate ? format(birthDate, "yyyy-MM-dd") : "";
     // Update user data
     updateUserData(userData._id, {
+      name,
       firstName,
       lastName,
       email,
@@ -87,14 +90,16 @@ const UserProfile = () => {
 
   return (
     <div className="profile-page">
-      <div className="profile-container left-container">
-        <div className="profile-image">
-          <img src={userData.profilePicture} alt="Profile" />
-        </div>
-        <div className="profile-info">
-          <h2>
-            {userData.firstName} {userData.lastName}
-          </h2>
+      <div className="profile-container-l left-container">
+        <div className="profImgI">
+          <div className="profile-image">
+            <img src={userData.profilePicture} alt="Profile" />
+          </div>
+          <div className="profile-info">
+            <h2>
+              {userData.firstName} {userData.lastName}
+            </h2>
+          </div>
         </div>
         <div className="profile-links">
           <ul>
@@ -110,9 +115,12 @@ const UserProfile = () => {
           </ul>
         </div>
       </div>
-      <div className="profile-container right-container">
-        <h2>Personal Information</h2>
+      <div className="profile-container-r right-container">
         <div className="user-info">
+          <h2>Personal Information</h2>
+          <p>
+            <strong>Username:</strong> {userData.name}
+          </p>
           <p>
             <strong>First Name:</strong> {firstName}
           </p>
@@ -130,57 +138,68 @@ const UserProfile = () => {
             {birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}
           </p>
         </div>
-        <h2>Update Information</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="phone">Phone Number:</label>
-            <input
-              type="text"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="birthDate">Birth Date:</label>
-            <DatePicker
-              id="birthDate"
-              selected={birthDate}
-              onChange={(date) => setBirthDate(date)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="dd/MM/yyyy"
-            />
-          </div>
-          <button type="submit">Save</button>
-          <button type="button">Cancel</button>
-        </form>
+        <div className="update-info">
+          <h2>Update Information</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Username:</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <div>
+                <label htmlFor="firstName">First Name:</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="lastName">Last Name:</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="phone">Phone Number:</label>
+                <input
+                  type="text"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="birthDate">Birth Date:</label>
+                <DatePicker
+                  id="birthDate"
+                  selected={birthDate}
+                  onChange={(date) => setBirthDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="dd/MM/yyyy"
+                />
+              </div>
+              <button type="submit">Save</button>
+              <button type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

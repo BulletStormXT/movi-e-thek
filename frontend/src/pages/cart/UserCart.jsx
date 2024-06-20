@@ -210,6 +210,8 @@ const UserCart = () => {
         <span className="a-price-fraction">{fraction}</span>
         <span className="a-price-symbol"> €</span>
       </h3>
+      {/* Vincent please style here */}
+      <button>Buy now!</button>
     </div>
   );
 };

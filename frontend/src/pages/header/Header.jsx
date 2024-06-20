@@ -78,16 +78,13 @@ function NavScrollExample() {
               navbarScroll
             >
               {/* Navigation items */}
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
             </Nav>
           </div>
           <div className="main-navbar-div searchbar">
             <Form className="searchbar-form">
               <Form.Control
                 type="search"
-                placeholder="Enter a keyword and press 🦆 to search..."
+                placeholder="Type a keyword and press Enter to search..."
                 className="me-2 searchbar-input"
                 aria-label="Search"
                 value={search}

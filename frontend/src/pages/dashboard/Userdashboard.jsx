@@ -421,13 +421,13 @@ const UserDashboard = () => {
 
   return (
     <div className="udash">
-      <h1 style={{ textAlign: "center" }}>User Dashboard</h1>
-      <input
+      {/* <h1 style={{ textAlign: "center" }}>User Dashboard</h1> */}
+      {/* <input
         type="text"
         placeholder="Search Movies"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-      />
+      /> */}
       <div className="udash-search">
         {movies.map((movie) => {
           const [whole, fraction] = movie.price.toFixed(2).split(".");
