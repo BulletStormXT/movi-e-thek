@@ -29,6 +29,8 @@ function NavScrollExample() {
         }
         const data = await response.json();
         setSearchResult(data);
+
+        console.log("Search results:", data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -94,7 +96,7 @@ function NavScrollExample() {
               <Button variant="searchbar-button" onClick={handleSearch}>
                 Search
               </Button>
-            </Form>
+            </Form>{" "}
             {searchResult.length > 0 && (
               <div className="search-results">
                 {searchResult.map((product) => (
@@ -104,7 +106,21 @@ function NavScrollExample() {
                     onClick={() => handleSearchResultClick(product._id)}
                   >
                     <Link to={`/product/${product._id}`}>
-                      {product.name} - €{product.price.toFixed(2)}
+                      <div className="d-flex align-items-center">
+                        <img
+                          src={product.image} // Assuming product.image contains the image URL
+                          alt={product.name}
+                          style={{
+                            width: "50px",
+                            height: "auto",
+                            marginRight: "10px",
+                          }}
+                        />
+                        <div>
+                          <div>{product.name}</div>
+                          <div>€{product.price.toFixed(2)}</div>
+                        </div>
+                      </div>
                     </Link>
                   </div>
                 ))}
