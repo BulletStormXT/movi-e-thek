@@ -880,3 +880,39 @@ a:active {
   font-weight: bold;
   color: #007bff;
 }
+
+/* Searchbar */
+
+.main-navbar {
+  background-color: #ffffff;
+}
+
+.searchbar {
+  position: relative;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.search-results .search-result-item {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.search-results .search-result-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.search-results .search-result-item:hover {
+  background-color: #f0f0f0;
+}
