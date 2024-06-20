@@ -22,6 +22,21 @@ router.patch(
   authMiddleware.authenticateToken,
   userController.updateUser
 );
+
+// GET user by ID (protected route)
+router.get("/user/:id", authMiddleware.authenticateToken, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).send("Error fetching user");
+  }
+});
 const deleteUserById = async (req, res) => {
   try {
     const userID = req.params.id;

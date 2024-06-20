@@ -10,8 +10,12 @@ const cartItemSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: String,
+  phone: String,
+  birthDate: Date,
+  profilePicture: String,
   password: String,
   cart: [cartItemSchema],
   udash: [{ type: Schema.Types.ObjectId, ref: "Product" }],

@@ -5,7 +5,8 @@ import { format, parseISO } from "date-fns"; // npm install date-fns
 
 const fetchUserData = () => {
   const token = localStorage.getItem("token");
-  return fetch("http://localhost:3001/api/user", {
+  const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
+  return fetch(`http://localhost:3001/api/user/${userId}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   }).then((response) => {
@@ -37,34 +38,34 @@ const updateUserData = (userId, updates) => {
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
-  /* const [username, setUsername] = useState(""); */
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState(null);
-  const userId = localStorage.getItem("userId");
 
+  // Fetch user data when component mounts
   useEffect(() => {
     fetchUserData()
       .then((data) => {
         setUserData(data);
-        /* setUsername(data.name);
-        setEmail(data.email); */
-        setFirstName(data.firstName);
-        setLastName(data.lastName);
-        setEmail(data.email);
-        setPhone(data.phone);
+        // Set initial form values from fetched data
+        setFirstName(data.firstName || "");
+        setLastName(data.lastName || "");
+        setEmail(data.email || "");
+        setPhone(data.phone || "");
         setBirthDate(data.birthDate ? parseISO(data.birthDate) : null);
       })
       .catch((error) => console.error("Error fetching user data:", error));
   }, []);
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* updateUserData(userId, { name: username, email: email }) */
+    // Format birthDate if it exists
     const formattedBirthDate = birthDate ? format(birthDate, "yyyy-MM-dd") : "";
-    updateUserData(userId, {
+    // Update user data
+    updateUserData(userData._id, {
       firstName,
       lastName,
       email,
@@ -73,59 +74,26 @@ const UserProfile = () => {
     })
       .then((updatedData) => {
         setUserData(updatedData);
-        /* localStorage.setItem("name", updatedData.name);
-        localStorage.setItem("email", updatedData.email); */
-        localStorage.setItem("firstName", updatedData.firstName);
-        localStorage.setItem("lastName", updatedData.lastName);
-        localStorage.setItem("email", updatedData.email);
-        localStorage.setItem("phone", updatedData.phone);
-        localStorage.setItem("birthDate", updatedData.birthDate);
+        // Update local storage with updated user data
+        localStorage.setItem("userData", JSON.stringify(updatedData));
       })
       .catch((error) => console.error("Error updating user data:", error));
   };
 
-  /* return (
-    <div id="profile-container" className="profile-container">
-      <div className="ppph-frame">
-        <div className="ppph">PP</div>
-      </div>
-      <div className="text-container">
-        <p className="username">Username: {localStorage.getItem("name")}</p>
-        <p className="email">Email: {localStorage.getItem("email")}</p>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <button type="submit">Update Profile</button>
-        </form>
-      </div>
-    </div>
-  ); */
+  // Conditional rendering to avoid displaying userData when it's null
+  if (!userData) {
+    return <div>Loading...</div>; // You can customize this loading indicator
+  }
 
   return (
     <div className="profile-page">
       <div className="profile-container left-container">
         <div className="profile-image">
-          <img src={userData?.profilePicture} alt="Profile" />
+          <img src={userData.profilePicture} alt="Profile" />
         </div>
         <div className="profile-info">
           <h2>
-            {userData?.firstName} {userData?.lastName}
+            {userData.firstName} {userData.lastName}
           </h2>
         </div>
         <div className="profile-links">
@@ -144,6 +112,25 @@ const UserProfile = () => {
       </div>
       <div className="profile-container right-container">
         <h2>Personal Information</h2>
+        <div className="user-info">
+          <p>
+            <strong>First Name:</strong> {firstName}
+          </p>
+          <p>
+            <strong>Last Name:</strong> {lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {email}
+          </p>
+          <p>
+            <strong>Phone:</strong> {phone}
+          </p>
+          <p>
+            <strong>Birth Date:</strong>{" "}
+            {birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}
+          </p>
+        </div>
+        <h2>Update Information</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="firstName">First Name:</label>
