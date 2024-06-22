@@ -4,9 +4,41 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format, parseISO } from "date-fns"; // npm install date-fns
 
 const phonePrefixes = [
-  { country: "Germany", prefix: "+49 (0)" },
-  { country: "Hell", prefix: "+666 (0)" },
-  { country: "Heaven", prefix: "+777 (0)" },
+  { country: "Germany", prefix: "+49(0)" },
+  { country: "Hell", prefix: "+666(0)" },
+  { country: "Heaven", prefix: "+777(0)" },
+  { country: "Afghanistan", prefix: "+93(0)" },
+  { country: "Albania", prefix: "+355(0)" },
+  { country: "Algeria", prefix: "+213(0)" },
+  { country: "Andorra", prefix: "+376(0)" },
+  { country: "Spain", prefix: "+34(0)" },
+  { country: "United States", prefix: "+1(0)" },
+  { country: "United Kingdom", prefix: "+44(0)" },
+  { country: "France", prefix: "+33(0)" },
+  { country: "Italy", prefix: "+39(0)" },
+  { country: "Japan", prefix: "+81(0)" },
+  { country: "China", prefix: "+86(0)" },
+  { country: "Russia", prefix: "+7(0)" },
+  { country: "Brazil", prefix: "+55(0)" },
+  { country: "India", prefix: "+91(0)" },
+  { country: "Norway", prefix: "+47(0)" },
+  { country: "Sweden", prefix: "+46(0)" },
+  { country: "Finland", prefix: "+358(0)" },
+  { country: "Denmark", prefix: "+45(0)" },
+  { country: "Netherlands", prefix: "+31(0)" },
+  { country: "Belgium", prefix: "+32(0)" },
+  { country: "Luxembourg", prefix: "+352(0)" },
+  { country: "Switzerland", prefix: "+41(0)" },
+  { country: "Austria", prefix: "+43(0)" },
+  { country: "Poland", prefix: "+48(0)" },
+  { country: "Czech Republic", prefix: "+420(0)" },
+  { country: "Slovakia", prefix: "+421(0)" },
+  { country: "Hungary", prefix: "+36(0)" },
+  { country: "Croatia", prefix: "+385(0)" },
+  { country: "Slovenia", prefix: "+386(0)" },
+  { country: "Bosnia and Herzegovina", prefix: "+387(0)" },
+  { country: "Montenegro", prefix: "+382(0)" },
+  { country: "Bikini Bottom", prefix: "+123(0)" },
 ];
 
 const fetchUserData = () => {
@@ -100,41 +132,49 @@ const UserProfile = () => {
     <div className="profile-page">
       <div className="profile-container-l left-container">
         <div className="profImgI">
-          <div className="profile-image">
-            {userData.profilePicture ? (
-              <img src={userData.profilePicture} alt="Profile" />
-            ) : (
-              <div
-                style={{ width: "100%", height: "100%", borderRadius: "15px" }}
-              >
-                <span>Profile Picture Placeholder</span>
-              </div>
-            )}
-          </div>
-          <div className="profile-info">
-            <h2>
-              {userData.firstName} {userData.lastName}
-            </h2>
+          <div className="profile-wrapper-t">
+            <div className="profile-image">
+              {userData.profilePicture ? (
+                <img src={userData.profilePicture} alt="Profile" />
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <span>Profile Picture Placeholder</span>
+                </div>
+              )}
+            </div>
+            <div className="profile-info">
+              <h2>
+                {userData.firstName} {userData.lastName}
+              </h2>
+            </div>
           </div>
         </div>
-        <div className="profile-links">
-          <ul>
-            <li className="profile-link">
-              <a href="#orders">My Orders</a>
-            </li>
-            <li className="profile-link">
-              <a href="#settings">Wishlist</a>
-            </li>
-            <li className="profile-link">
-              <a href="#wallet">My Wallet</a>
-            </li>
-            <li className="profile-link">
-              <a href="#settings">Settings</a>
-            </li>
-            <li className="profile-link">
-              <a href="#settings">Support</a>
-            </li>
-          </ul>
+        <div className="profile-wrapper-b">
+          <div className="profile-links">
+            <ul>
+              <li className="profile-link">
+                <a href="#orders">My Orders</a>
+              </li>
+              <li className="profile-link">
+                <a href="#settings">Wishlist</a>
+              </li>
+              <li className="profile-link">
+                <a href="#wallet">My Wallet</a>
+              </li>
+              <li className="profile-link">
+                <a href="#settings">Settings</a>
+              </li>
+              <li className="profile-link">
+                <a href="#settings">Support</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="profile-container-r right-container">
