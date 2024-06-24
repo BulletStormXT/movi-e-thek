@@ -90,7 +90,7 @@ const HomeUser = () => {
                       />
                     </p>
                     <h4 className="text-center">{product.name}</h4>
-                    <p>Genre: {product.category}</p>
+                    <p>{product.category}</p>
                     {/* <p>Plot: {product.description}</p> */}
 
                     <p className="price">
@@ -104,13 +104,13 @@ const HomeUser = () => {
                   {isLoggedIn && (
                     <>
                       <button
-                        className="add2Db"
+                        className="add2Db-home"
                         onClick={() => addToDashboard(product._id)}
                       >
                         Add to Dashboard
                       </button>
                       <button
-                        className="add2SC"
+                        className="add2SC-home"
                         onClick={() => addToCart(product._id)}
                       >
                         Add to Shopping Cart

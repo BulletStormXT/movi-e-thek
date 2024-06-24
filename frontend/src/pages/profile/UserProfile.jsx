@@ -36,7 +36,8 @@ const phonePrefixes = [
   { country: "Hungary", prefix: "+36(0)" },
   { country: "Croatia", prefix: "+385(0)" },
   { country: "Slovenia", prefix: "+386(0)" },
-  { country: "Bosnia and Herzegovina", prefix: "+387(0)" },
+  { country: "Bosnia", prefix: "+387(0)" },
+  { country: "Herzegovina", prefix: "+387(0)" },
   { country: "Montenegro", prefix: "+382(0)" },
   { country: "Bikini Bottom", prefix: "+123(0)" },
 ];
@@ -80,6 +81,7 @@ const UserProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState(null);
 
@@ -95,6 +97,7 @@ const UserProfile = () => {
         setFirstName(data.firstName || "");
         setLastName(data.lastName || "");
         setEmail(data.email || "");
+        setProfilePicture(data.profilePicture || "");
         setPhone(data.phone || "");
         setBirthDate(data.birthDate ? parseISO(data.birthDate) : null);
       })
@@ -112,6 +115,7 @@ const UserProfile = () => {
       firstName,
       lastName,
       email,
+      profilePicture,
       phone: `${selectedPrefix}${phone}`,
       birthDate: formattedBirthDate,
     })
@@ -155,6 +159,72 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
+        <div className="user-info">
+          <table className="invisible-table">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Username:</strong>
+                </td>
+                <td>{userData.name}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>First Name:&nbsp; &nbsp;</strong>
+                </td>
+                <td>{firstName}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Last Name:</strong>
+                </td>
+                <td>{lastName}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Email:</strong>
+                </td>
+                <td>{email}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Phone:</strong>
+                </td>
+                <td>{`${selectedPrefix} ${phone}`}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Birth Date:</strong>
+                </td>
+                <td>{birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {/* <div className="user-info"> */}
+        {/* <h2>Personal Information</h2> */}
+        {/* <p>
+            <strong>Username:</strong>
+            {userData.name}
+          </p>
+          <p>
+            <strong>First Name:</strong>
+            {firstName}
+          </p>
+          <p>
+            <strong>Last Name:</strong> {lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {email}
+          </p>
+          <p>
+            <strong>Phone:</strong> {`${selectedPrefix} ${phone}`}
+          </p>
+          <p>
+            <strong>Birth Date:</strong>{" "}
+            {birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}
+          </p>
+        </div> */}
         <div className="profile-wrapper-b">
           <div className="profile-links">
             <ul>
@@ -178,39 +248,19 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="profile-container-r right-container">
-        <div className="user-info">
-          <h2>Personal Information</h2>
-          <p>
-            <strong>Username:</strong> {userData.name}
-          </p>
-          <p>
-            <strong>First Name:</strong> {firstName}
-          </p>
-          <p>
-            <strong>Last Name:</strong> {lastName}
-          </p>
-          <p>
-            <strong>Email:</strong> {email}
-          </p>
-          <p>
-            <strong>Phone:</strong> {`${selectedPrefix} ${phone}`}
-          </p>
-          <p>
-            <strong>Birth Date:</strong>{" "}
-            {birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}
-          </p>
-        </div>
         <div className="update-info">
-          <h2>Update Information</h2>
+          <h2>Update your Information</h2>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name">Username:</label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <div>
+                <label htmlFor="name">Username:</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
               <div>
                 <label htmlFor="firstName">First Name:</label>
                 <input
@@ -236,6 +286,15 @@ const UserProfile = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="profilePicture">Profile Picture:</label>
+                <input
+                  type="text"
+                  id="profilePicture"
+                  value={profilePicture}
+                  onChange={(e) => setProfilePicture(e.target.value)}
                 />
               </div>
               <div className="phone-coantainer">
@@ -268,6 +327,10 @@ const UserProfile = () => {
                   onChange={(date) => setBirthDate(date)}
                   dateFormat="dd/MM/yyyy"
                   placeholderText="dd/MM/yyyy"
+                  showMonthDropdown
+                  showYearDropdown
+                  scrollableYearDropdown
+                  yearDropdownItemNumber={200}
                 />
               </div>
               <div className="change-button">

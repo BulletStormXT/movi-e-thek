@@ -211,7 +211,7 @@ const UserCart = () => {
         <span className="a-price-symbol"> €</span>
       </h3>
       {/* Vincent please style here */}
-      <button>Buy now!</button>
+      <button className="buy-now">Buy Now</button>
     </div>
   );
 };

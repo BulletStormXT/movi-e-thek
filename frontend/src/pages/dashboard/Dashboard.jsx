@@ -42,6 +42,7 @@ function Dashboard() {
     const fetchUsers = async () => {
       try {
         const response = await fetch("http://localhost:3001/api/user", {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -68,7 +69,7 @@ function Dashboard() {
   }, [token, fetchProducts]);
 
   // Function to handle product deletion
-  const handleDelete = async (productId) => {
+  const handleDeleteProduct = async (productId) => {
     try {
       const response = await fetch(
         `http://localhost:3001/api/products/${productId}`,
@@ -88,6 +89,26 @@ function Dashboard() {
       }
     } catch (error) {
       console.error("Error deleting product:", error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // fetchProducts is wrong, we need to use fetchUsers
+        fetchProducts();
+      } else {
+        throw new Error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -115,8 +136,9 @@ function Dashboard() {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
+                  {/* establish a navigate, because the user is only deleted with a refresh */}
                   <FaRegTrashAlt
-                    onClick={() => handleDelete(user._id)}
+                    onClick={() => handleDeleteUser(user._id)}
                     style={{ cursor: "pointer" }}
                   />
                 </td>
@@ -159,7 +181,7 @@ function Dashboard() {
                 <td>{product.category}</td>
                 <td>
                   <FaRegTrashAlt
-                    onClick={() => handleDelete(product._id)}
+                    onClick={() => handleDeleteProduct(product._id)}
                     style={{ cursor: "pointer" }}
                   />
                 </td>

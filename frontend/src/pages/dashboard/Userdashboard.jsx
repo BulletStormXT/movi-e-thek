@@ -437,9 +437,9 @@ const UserDashboard = () => {
               <div className="udash-res-cont" key={movie._id}>
                 <div className="udash-res">
                   <Link to={`/product/${movie._id}`} state={{ movie }}>
-                    <h3>{movie.name}</h3>
                     <img src={movie.image} alt={movie.name} />
-                    <p>Genre: {movie.category}</p>
+                    <h3>{movie.name}</h3>
+                    <p>{movie.category}</p>
                     <p className="price">
                       <span className="a-price-whole">{whole}</span>
                       <span className="a-price-decimal"></span>
@@ -459,15 +459,17 @@ const UserDashboard = () => {
           );
         })}
       </div>
-      <h2 style={{ textAlign: "center" }}>My Dashboard Items</h2>
+      {/* <h2 style={{ textAlign: "center" }}>
+        My Dashboard Items - I'm not inside udash-search!
+      </h2> */}
       <div className="udash-items">
         {dashboardItems.map((item) => (
           <div className="udash-res-cont" key={item._id}>
             <div className="udash-res">
               <Link to={`/product/${item._id}`} state={{ item }}>
-                <h3>{item.name}</h3>
                 <img src={item.image} alt={item.name} />
-                <p>Genre: {item.category}</p>
+                <h3>{item.name}</h3>
+                <p>{item.category}</p>
                 <p className="price">
                   <span className="a-price-whole">
                     {item.price ? item.price.toFixed(2).split(".")[0] : ""}
@@ -479,8 +481,16 @@ const UserDashboard = () => {
                   <span className="a-price-symbol"> €</span>
                 </p>
               </Link>
-              <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
-              <button onClick={() => handleAddToCart(item._id)}>
+              <button
+                className="udash-rmv"
+                onClick={() => handleRemoveItem(item._id)}
+              >
+                Remove
+              </button>
+              <button
+                className="udash-add2C"
+                onClick={() => handleAddToCart(item._id)}
+              >
                 Add to Cart
               </button>
             </div>
