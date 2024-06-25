@@ -10,7 +10,7 @@ const cors = require("cors");
 const movieRoute = require("./routes/movieRoutes");
 const createAdminAccount = require("./scripts/admin");
 const cartRoutes = require("./routes/cart");
-
+const udashRoutes = require("./routes/udash");
 const app = express();
 
 app.use(bodyParser.json());
@@ -27,6 +27,8 @@ app.use("/api/products", productRoute);
 app.use("/api/movies", movieRoute);
 //cartRoutes
 app.use("/api/cart", cartRoutes);
+//! udashBoardRoutes
+app.use("/api/udash", udashRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -88,3 +88,16 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+// Function to search products by name
+exports.searchProductsByName = async (req, res) => {
+  const { search } = req.query;
+  const regex = new RegExp(search, "i"); // Case-insensitive search
+
+  try {
+    const products = await Product.find({ name: regex });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};

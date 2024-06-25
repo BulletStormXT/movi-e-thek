@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Table, Button, Form } from "react-bootstrap";
-import { FaRegTrashAlt, FaEdit, FaSave, FaTimes } from "react-icons/fa";
-import AddProductForm from "./AddProductForm"; // Import the new component
+import { Container, Table } from "react-bootstrap";
+import { FaRegTrashAlt, FaPen } from "react-icons/fa";
+import { IoTrashSharp } from "react-icons/io5";
+import { BsFloppyFill } from "react-icons/bs";
+import { MdCancel } from "react-icons/md";
 
 function Dashboard() {
   const token = localStorage.getItem("token");
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
-  const [editingProductId, setEditingProductId] = useState(null);
-  const [editingProductData, setEditingProductData] = useState({});
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [editedProduct, setEditedProduct] = useState({});
   const navigate = useNavigate();
 
-  // Function to fetch list of products
-  // Funktion in useCallback einwickeln
   const fetchProducts = useCallback(async () => {
     try {
       const response = await fetch("http://localhost:3001/api/products", {
@@ -26,25 +26,9 @@ function Dashboard() {
     } catch (error) {
       console.log(error.message);
     }
-  }, [token]); // Abhängigkeiten für useCallback
+  }, [token]);
 
-  // Function to fetch list of users
-  const fetchUsers = useCallback(async () => {
-    try {
-      const response = await fetch("http://localhost:3001/api/user", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const result = await response.json();
-      setUsers(result);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, [token]); // Abhängigkeiten für useCallback
-
-  // Kontrolle ob es sich um einen Admin handelt
+  //? Kontrolle ob es sich um einen Admin handelt
   useEffect(() => {
     const role = localStorage.getItem("role");
 
@@ -52,28 +36,34 @@ function Dashboard() {
       console.error(
         "Access denied. Users are not allowed to access the admin dashboard."
       );
-      navigate("/user/dashboard"); // navigate to a different page, e.g., home page
+      navigate("/user/dashboard");
     }
   }, [navigate]);
 
-  // Fetch list of users on component mount or token change
   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const result = await response.json();
+        setUsers(result);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
     if (token) {
       fetchUsers();
+      fetchProducts();
     } else {
       navigate("/login");
     }
-  }, [token, navigate, fetchUsers]);
+  }, [token, navigate, fetchProducts]);
 
-  // Fetch list of products on component mount
-  useEffect(() => {
-    if (token) {
-      fetchProducts();
-    }
-  }, [token, fetchProducts]);
-
-  // Function to handle product deletion
-  const handleDeleteProduct = async (productId) => {
+  const handleDelete = async (productId) => {
     try {
       const response = await fetch(
         `http://localhost:3001/api/products/${productId}`,
@@ -86,7 +76,6 @@ function Dashboard() {
       );
 
       if (response.ok) {
-        // Successful deletion, update products list
         fetchProducts();
       } else {
         throw new Error("Failed to delete product");
@@ -96,58 +85,28 @@ function Dashboard() {
     }
   };
 
-  // Function to handle user deletion
-  const handleDeleteUser = async (userId) => {
-    try {
-      const response = await fetch(`http://localhost:3001/api/${userId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        // Successful deletion, update users list
-        fetchUsers();
-      } else {
-        throw new Error("Failed to delete user");
-      }
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
+  const startEditing = (product) => {
+    setEditingProduct(product);
+    setEditedProduct({ ...product });
   };
 
-  // Function to handle editing of a product
-  const handleEditProduct = (product) => {
-    setEditingProductId(product._id);
-    setEditingProductData(product);
-  };
-
-  // Function to handle input changes for the editing product
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditingProductData({ ...editingProductData, [name]: value });
-  };
-
-  // Function to handle saving the edited product
-  const handleSaveProduct = async () => {
+  const saveChanges = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/products/${editingProductId}`,
+        `http://localhost:3001/api/products/${editedProduct._id}`,
         {
-          method: "PATCH",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(editingProductData),
+          body: JSON.stringify(editedProduct),
         }
       );
 
       if (response.ok) {
-        // Successful update, update products list
         fetchProducts();
-        setEditingProductId(null);
+        setEditingProduct(null);
       } else {
         throw new Error("Failed to update product");
       }
@@ -156,10 +115,29 @@ function Dashboard() {
     }
   };
 
-  // Function to handle canceling the editing
-  const handleCancelEdit = () => {
-    setEditingProductId(null);
-    setEditingProductData({});
+  const cancelEditing = () => {
+    setEditingProduct(null);
+    setEditedProduct({});
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/user/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const updatedUsers = users.filter((user) => user._id !== userId);
+        setUsers(updatedUsers);
+      } else {
+        throw new Error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
   return (
@@ -185,8 +163,7 @@ function Dashboard() {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>
-                  {/* establish a navigate, because the user is only deleted with a refresh */}
+                <td style={{ display: "flex", justifyContent: "center" }}>
                   <FaRegTrashAlt
                     onClick={() => handleDeleteUser(user._id)}
                     style={{ cursor: "pointer" }}
@@ -219,48 +196,64 @@ function Dashboard() {
               <tr key={product._id}>
                 <td>{index + 1}</td>
                 <td>
-                  {editingProductId === product._id ? (
-                    <Form.Control
+                  {editingProduct === product ? (
+                    <input
                       type="text"
-                      name="name"
-                      value={editingProductData.name}
-                      onChange={handleInputChange}
+                      value={editedProduct.name}
+                      onChange={(e) =>
+                        setEditedProduct({
+                          ...editedProduct,
+                          name: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     product.name
                   )}
                 </td>
                 <td>
-                  {editingProductId === product._id ? (
-                    <Form.Control
-                      type="number"
-                      name="price"
-                      value={editingProductData.price}
-                      onChange={handleInputChange}
+                  {editingProduct === product ? (
+                    <input
+                      type="text"
+                      value={editedProduct.price}
+                      onChange={(e) =>
+                        setEditedProduct({
+                          ...editedProduct,
+                          price: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     product.price
                   )}
                 </td>
                 <td>
-                  {editingProductId === product._id ? (
-                    <Form.Control
+                  {editingProduct === product ? (
+                    <input
                       type="text"
-                      name="description"
-                      value={editingProductData.description}
-                      onChange={handleInputChange}
+                      value={editedProduct.description}
+                      onChange={(e) =>
+                        setEditedProduct({
+                          ...editedProduct,
+                          description: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     product.description
                   )}
                 </td>
                 <td>
-                  {editingProductId === product._id ? (
-                    <Form.Control
+                  {editingProduct === product ? (
+                    <input
                       type="text"
-                      name="image"
-                      value={editingProductData.image}
-                      onChange={handleInputChange}
+                      value={editedProduct.image}
+                      onChange={(e) =>
+                        setEditedProduct({
+                          ...editedProduct,
+                          image: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     <img
@@ -271,37 +264,41 @@ function Dashboard() {
                   )}
                 </td>
                 <td>
-                  {editingProductId === product._id ? (
-                    <Form.Control
+                  {editingProduct === product ? (
+                    <input
                       type="text"
-                      name="category"
-                      value={editingProductData.category}
-                      onChange={handleInputChange}
+                      value={editedProduct.category}
+                      onChange={(e) =>
+                        setEditedProduct({
+                          ...editedProduct,
+                          category: e.target.value,
+                        })
+                      }
                     />
                   ) : (
                     product.category
                   )}
                 </td>
                 <td>
-                  {editingProductId === product._id ? (
+                  {editingProduct === product ? (
                     <>
-                      <FaSave
-                        onClick={handleSaveProduct}
-                        style={{ cursor: "pointer", marginRight: "10px" }}
+                      <BsFloppyFill
+                        onClick={saveChanges}
+                        style={{ cursor: "pointer" }}
                       />
-                      <FaTimes
-                        onClick={handleCancelEdit}
+                      <MdCancel
+                        onClick={cancelEditing}
                         style={{ cursor: "pointer" }}
                       />
                     </>
                   ) : (
                     <>
-                      <FaEdit
-                        onClick={() => handleEditProduct(product)}
-                        style={{ cursor: "pointer", marginRight: "10px" }}
+                      <FaPen
+                        onClick={() => startEditing(product)}
+                        style={{ cursor: "pointer" }}
                       />
-                      <FaRegTrashAlt
-                        onClick={() => handleDeleteProduct(product._id)}
+                      <IoTrashSharp
+                        onClick={() => handleDelete(product._id)}
                         style={{ cursor: "pointer" }}
                       />
                     </>
@@ -311,7 +308,6 @@ function Dashboard() {
             ))}
           </tbody>
         </Table>
-        <AddProductForm onProductAdded={fetchProducts} />
       </Container>
     </>
   );

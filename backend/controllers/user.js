@@ -1,17 +1,15 @@
-const userService = require("../services/user");
 const User = require("../models/user");
-const { patch } = require("../routes/cart");
 
 async function getUsers(req, res) {
   try {
-    const users = await userService.getUsers();
+    const users = await User.find({});
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error });
   }
 }
 
-exports.deleteUser = async (req, res) => {
+async function deleteUser(req, res) {
   const { id } = req.params;
 
   try {
@@ -26,11 +24,23 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
-};
+}
 
-exports.updateUser = async (req, res) => {
+async function updateUser(req, res) {
   const userId = req.params.id;
   const updates = req.body;
+
+  // Check if the email is being updated
+  if (updates.email) {
+    try {
+      const existingUser = await User.findOne({ email: updates.email });
+      if (existingUser && existingUser._id.toString() !== userId) {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+    } catch (error) {
+      return res.status(500).json({ message: "Server error", error });
+    }
+  }
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -47,8 +57,10 @@ exports.updateUser = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
+}
 
 module.exports = {
   getUsers,
+  deleteUser,
+  updateUser,
 };
