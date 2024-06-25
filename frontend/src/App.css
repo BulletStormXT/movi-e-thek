@@ -652,17 +652,17 @@ a:active {
   /* flex-wrap: wrap !important; */
 }
 
-.udash-search {
-  /* border: 1px solid #ff00e6; */
-  /* display: grid !important; */
-  /* display: flex !important; */
-  /* flex-wrap: wrap !important; */
-  /* justify-content: center !important; */
-  /* align-items: center !important; */
-  /* align-content: center !important; */
+/* .udash-search { */
+/* border: 1px solid #ff00e6; */
+/* display: grid !important; */
+/* display: flex !important; */
+/* flex-wrap: wrap !important; */
+/* justify-content: center !important; */
+/* align-items: center !important; */
+/* align-content: center !important; */
 
-  /* gap: 30px !important; */
-}
+/* gap: 30px !important; */
+/* }  */
 
 .udash-items {
   /* border: 1px solid #ffd900; */
