@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Table } from "react-bootstrap";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { Container, Table, Button, Form } from "react-bootstrap";
+import { FaRegTrashAlt, FaEdit, FaSave, FaTimes } from "react-icons/fa";
+import AddProductForm from "./AddProductForm"; // Import the new component
 
 function Dashboard() {
   const token = localStorage.getItem("token");
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
+  const [editingProductId, setEditingProductId] = useState(null);
+  const [editingProductData, setEditingProductData] = useState({});
   const navigate = useNavigate();
 
   // Function to fetch list of products
@@ -20,6 +23,22 @@ function Dashboard() {
       });
       const result = await response.json();
       setProducts(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [token]); // Abhängigkeiten für useCallback
+
+  // Function to fetch list of users
+  const fetchUsers = useCallback(async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/user", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      setUsers(result);
     } catch (error) {
       console.log(error.message);
     }
@@ -39,27 +58,12 @@ function Dashboard() {
 
   // Fetch list of users on component mount or token change
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/api/user", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const result = await response.json();
-        setUsers(result);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
     if (token) {
       fetchUsers();
     } else {
       navigate("/login");
     }
-  }, [token, navigate]);
+  }, [token, navigate, fetchUsers]);
 
   // Fetch list of products on component mount
   useEffect(() => {
@@ -92,6 +96,7 @@ function Dashboard() {
     }
   };
 
+  // Function to handle user deletion
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(`http://localhost:3001/api/${userId}`, {
@@ -102,14 +107,59 @@ function Dashboard() {
       });
 
       if (response.ok) {
-        // fetchProducts is wrong, we need to use fetchUsers
-        fetchProducts();
+        // Successful deletion, update users list
+        fetchUsers();
       } else {
         throw new Error("Failed to delete user");
       }
     } catch (error) {
       console.error("Error deleting user:", error);
     }
+  };
+
+  // Function to handle editing of a product
+  const handleEditProduct = (product) => {
+    setEditingProductId(product._id);
+    setEditingProductData(product);
+  };
+
+  // Function to handle input changes for the editing product
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingProductData({ ...editingProductData, [name]: value });
+  };
+
+  // Function to handle saving the edited product
+  const handleSaveProduct = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/products/${editingProductId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editingProductData),
+        }
+      );
+
+      if (response.ok) {
+        // Successful update, update products list
+        fetchProducts();
+        setEditingProductId(null);
+      } else {
+        throw new Error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
+
+  // Function to handle canceling the editing
+  const handleCancelEdit = () => {
+    setEditingProductId(null);
+    setEditingProductData({});
   };
 
   return (
@@ -168,27 +218,100 @@ function Dashboard() {
             {products.map((product, index) => (
               <tr key={product._id}>
                 <td>{index + 1}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.description}</td>
                 <td>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    style={{ maxWidth: "100px", maxHeight: "100px" }}
-                  />
+                  {editingProductId === product._id ? (
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      value={editingProductData.name}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    product.name
+                  )}
                 </td>
-                <td>{product.category}</td>
                 <td>
-                  <FaRegTrashAlt
-                    onClick={() => handleDeleteProduct(product._id)}
-                    style={{ cursor: "pointer" }}
-                  />
+                  {editingProductId === product._id ? (
+                    <Form.Control
+                      type="number"
+                      name="price"
+                      value={editingProductData.price}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    product.price
+                  )}
+                </td>
+                <td>
+                  {editingProductId === product._id ? (
+                    <Form.Control
+                      type="text"
+                      name="description"
+                      value={editingProductData.description}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    product.description
+                  )}
+                </td>
+                <td>
+                  {editingProductId === product._id ? (
+                    <Form.Control
+                      type="text"
+                      name="image"
+                      value={editingProductData.image}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                    />
+                  )}
+                </td>
+                <td>
+                  {editingProductId === product._id ? (
+                    <Form.Control
+                      type="text"
+                      name="category"
+                      value={editingProductData.category}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    product.category
+                  )}
+                </td>
+                <td>
+                  {editingProductId === product._id ? (
+                    <>
+                      <FaSave
+                        onClick={handleSaveProduct}
+                        style={{ cursor: "pointer", marginRight: "10px" }}
+                      />
+                      <FaTimes
+                        onClick={handleCancelEdit}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <FaEdit
+                        onClick={() => handleEditProduct(product)}
+                        style={{ cursor: "pointer", marginRight: "10px" }}
+                      />
+                      <FaRegTrashAlt
+                        onClick={() => handleDeleteProduct(product._id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
+        <AddProductForm onProductAdded={fetchProducts} />
       </Container>
     </>
   );
