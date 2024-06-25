@@ -77,59 +77,79 @@ const updateUserData = (userId, updates) => {
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
-  const [name, setName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState(null);
-
-  const [selectedPrefix, setSelectedPrefix] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    profilePicture: "",
+    phone: "",
+    birthDate: null,
+    selectedPrefix: "",
+  });
 
   // Fetch user data when component mounts
   useEffect(() => {
     fetchUserData()
       .then((data) => {
         setUserData(data);
-        // Set initial form values from fetched data
-        setName(data.name || "");
-        setFirstName(data.firstName || "");
-        setLastName(data.lastName || "");
-        setEmail(data.email || "");
-        setProfilePicture(data.profilePicture || "");
-        setPhone(data.phone || "");
-        setBirthDate(data.birthDate ? parseISO(data.birthDate) : null);
+        setFormData({
+          name: data.name || "",
+          firstName: data.firstName || "",
+          lastName: data.lastName || "",
+          email: data.email || "",
+          profilePicture: data.profilePicture || "",
+          phone: data.phone || "",
+          birthDate: data.birthDate ? parseISO(data.birthDate) : null,
+          selectedPrefix: "",
+        });
       })
       .catch((error) => console.error("Error fetching user data:", error));
   }, []);
 
-  // Handle form submission
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, birthDate: date });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Format birthDate if it exists
-    const formattedBirthDate = birthDate ? format(birthDate, "yyyy-MM-dd") : "";
-    // Update user data
+    const formattedBirthDate = formData.birthDate
+      ? format(formData.birthDate, "yyyy-MM-dd")
+      : "";
     updateUserData(userData._id, {
-      name,
-      firstName,
-      lastName,
-      email,
-      profilePicture,
-      phone: `${selectedPrefix}${phone}`,
+      ...formData,
+      phone: `${formData.selectedPrefix}${formData.phone}`,
       birthDate: formattedBirthDate,
     })
       .then((updatedData) => {
         setUserData(updatedData);
-        // Update local storage with updated user data
         localStorage.setItem("userData", JSON.stringify(updatedData));
       })
       .catch((error) => console.error("Error updating user data:", error));
   };
 
-  // Conditional rendering to avoid displaying userData when it's null
+  const handleCancel = () => {
+    if (userData) {
+      setFormData({
+        name: userData.name || "",
+        firstName: userData.firstName || "",
+        lastName: userData.lastName || "",
+        email: userData.email || "",
+        profilePicture: userData.profilePicture || "",
+        phone: userData.phone || "",
+        birthDate: userData.birthDate ? parseISO(userData.birthDate) : null,
+        selectedPrefix: "",
+      });
+    }
+  };
+
   if (!userData) {
-    return <div>Loading...</div>; // You can customize this loading indicator
+    return <div>Loading...</div>;
   }
 
   return (
@@ -172,59 +192,39 @@ const UserProfile = () => {
                 <td>
                   <strong>First Name:&nbsp; &nbsp;</strong>
                 </td>
-                <td>{firstName}</td>
+                <td>{userData.firstName}</td>
               </tr>
               <tr>
                 <td>
                   <strong>Last Name:</strong>
                 </td>
-                <td>{lastName}</td>
+                <td>{userData.lastName}</td>
               </tr>
               <tr>
                 <td>
                   <strong>Email:</strong>
                 </td>
-                <td>{email}</td>
+                <td>{userData.email}</td>
               </tr>
               <tr>
                 <td>
                   <strong>Phone:</strong>
                 </td>
-                <td>{`${selectedPrefix} ${phone}`}</td>
+                <td>{`${formData.selectedPrefix} ${userData.phone}`}</td>
               </tr>
               <tr>
                 <td>
                   <strong>Birth Date:</strong>
                 </td>
-                <td>{birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}</td>
+                <td>
+                  {userData.birthDate
+                    ? format(parseISO(userData.birthDate), "dd/MM/yyyy")
+                    : "N/A"}
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        {/* <div className="user-info"> */}
-        {/* <h2>Personal Information</h2> */}
-        {/* <p>
-            <strong>Username:</strong>
-            {userData.name}
-          </p>
-          <p>
-            <strong>First Name:</strong>
-            {firstName}
-          </p>
-          <p>
-            <strong>Last Name:</strong> {lastName}
-          </p>
-          <p>
-            <strong>Email:</strong> {email}
-          </p>
-          <p>
-            <strong>Phone:</strong> {`${selectedPrefix} ${phone}`}
-          </p>
-          <p>
-            <strong>Birth Date:</strong>{" "}
-            {birthDate ? format(birthDate, "dd/MM/yyyy") : "N/A"}
-          </p>
-        </div> */}
         <div className="profile-wrapper-b">
           <div className="profile-links">
             <ul>
@@ -257,8 +257,9 @@ const UserProfile = () => {
                 <input
                   type="text"
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -266,8 +267,9 @@ const UserProfile = () => {
                 <input
                   type="text"
                   id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -275,8 +277,9 @@ const UserProfile = () => {
                 <input
                   type="text"
                   id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -284,8 +287,9 @@ const UserProfile = () => {
                 <input
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -293,8 +297,9 @@ const UserProfile = () => {
                 <input
                   type="text"
                   id="profilePicture"
-                  value={profilePicture}
-                  onChange={(e) => setProfilePicture(e.target.value)}
+                  name="profilePicture"
+                  value={formData.profilePicture}
+                  onChange={handleChange}
                 />
               </div>
               <div className="phone-coantainer">
@@ -302,8 +307,9 @@ const UserProfile = () => {
                 <div className="phone-input">
                   <select
                     id="phonePrefix"
-                    value={selectedPrefix}
-                    onChange={(e) => setSelectedPrefix(e.target.value)}
+                    name="selectedPrefix"
+                    value={formData.selectedPrefix}
+                    onChange={handleChange}
                   >
                     {phonePrefixes.map((prefix, index) => (
                       <option key={index} value={prefix.prefix}>
@@ -314,8 +320,9 @@ const UserProfile = () => {
                   <input
                     type="text"
                     id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -323,8 +330,8 @@ const UserProfile = () => {
                 <label htmlFor="birthDate">Birth Date:</label>
                 <DatePicker
                   id="birthDate"
-                  selected={birthDate}
-                  onChange={(date) => setBirthDate(date)}
+                  selected={formData.birthDate}
+                  onChange={handleDateChange}
                   dateFormat="dd/MM/yyyy"
                   placeholderText="dd/MM/yyyy"
                   showMonthDropdown
@@ -335,7 +342,9 @@ const UserProfile = () => {
               </div>
               <div className="change-button">
                 <button type="submit">Save</button>
-                <button type="button">Cancel</button>
+                <button type="button" onClick={handleCancel}>
+                  Cancel
+                </button>
               </div>
             </div>
           </form>
