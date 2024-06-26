@@ -746,7 +746,7 @@ a:active {
   ) !important;
   box-shadow: 0 4px 8px rgba(0, 8, 20, 0.5) !important;
   flex: 1;
-  border: 1px solid #8000ff;
+  /* border: 1px solid #8000ff; */
   padding: 30px 30px;
   border-radius: 15px;
   align-items: center;
@@ -1208,4 +1208,32 @@ a:active {
 
 .search-results .search-result-item:hover {
   background-color: #f0f0f0;
+}
+
+/* add product-form */
+
+.addpr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addpr h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.addpr form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.addpr-btn {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: 15ch;
+  align-self: center;
 }

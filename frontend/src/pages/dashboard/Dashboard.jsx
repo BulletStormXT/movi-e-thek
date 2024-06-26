@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Table, Button, Form } from "react-bootstrap";
+import { Container, Table, Form } from "react-bootstrap";
 import { FaRegTrashAlt, FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import AddProductForm from "./AddProductForm"; // Import the new component
 

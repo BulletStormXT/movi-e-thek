@@ -35,7 +35,7 @@ function AddProductForm({ onProductAdded }) {
   };
 
   return (
-    <Container>
+    <Container className="addpr">
       <h2>Add New Product</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
@@ -93,7 +93,7 @@ function AddProductForm({ onProductAdded }) {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="addpr-btn">
           Add Product
         </Button>
       </Form>
