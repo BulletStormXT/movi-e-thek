@@ -164,8 +164,8 @@ function Dashboard() {
 
   return (
     <>
-      <div>
-        <h1 style={{ textAlign: "center" }}>Admin Dashboard</h1>
+      <div className="admin-dashboard-header">
+        <h1>Admin Dashboard</h1>
       </div>
       <Container>
         <Table striped bordered hover size="sm" variant="dark">
@@ -198,7 +198,7 @@ function Dashboard() {
         </Table>
       </Container>
 
-      <div>
+      <div className="admin-dashboard-header">
         <h1 style={{ textAlign: "center" }}>Products</h1>
       </div>
       <Container>

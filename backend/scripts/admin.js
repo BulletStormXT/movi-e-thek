@@ -5,7 +5,7 @@ async function createAdminAccount() {
   try {
     // admin account test
     // const existAdmin = await User.findOne({ role: "admin" }); // nach admin-rolle suchen
-    const existingAdmin = await User.findOne({ email: "marcel@gmail.com" });
+    const existingAdmin = await User.findOne({ email: "sebastian@gmail.com" });
     if (existingAdmin) {
       console.log("Admin account already exists");
       return;
@@ -14,8 +14,8 @@ async function createAdminAccount() {
 
       // admin account erstellen
       const newAdmin = new User({
-        name: "Marcel",
-        email: "marcel@gmail.com",
+        name: "Sebastian",
+        email: "sebastian@gmail.com",
         password: await bcrypt.hash("admin", 10),
         role: "admin",
       });

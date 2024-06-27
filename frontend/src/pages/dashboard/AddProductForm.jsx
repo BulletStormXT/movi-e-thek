@@ -36,7 +36,7 @@ function AddProductForm({ onProductAdded }) {
 
   return (
     <Container className="addpr">
-      <h2>Add New Product</h2>
+      <h1>Add New Product</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formName">
           <Form.Label>Name</Form.Label>

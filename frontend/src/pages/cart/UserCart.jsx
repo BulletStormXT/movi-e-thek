@@ -197,6 +197,7 @@ const UserCart = () => {
               max="10"
               value={item.quantity}
               onChange={(e) => updateQuantity(item._id, e.target.value)}
+              className="quantity-input"
             />
             <button className="rmv" onClick={() => deleteItem(item._id)}>
               Remove

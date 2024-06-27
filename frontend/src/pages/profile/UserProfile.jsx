@@ -168,7 +168,11 @@ const UserProfile = () => {
                     borderRadius: "15px",
                   }}
                 >
-                  <span>Profile Picture Placeholder</span>
+                  <span
+                    style={{ textAlign: "center", verticalAlign: "center" }}
+                  >
+                    Profile Picture Placeholder
+                  </span>
                 </div>
               )}
             </div>
