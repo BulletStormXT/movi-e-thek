@@ -66,7 +66,13 @@ function NavScrollExample() {
       <Container fluid>
         <Navbar.Brand className="ari">
           <Nav.Link as={Link} to="/">
-            Mov•Ǝ•Thek
+            <img
+              src="./assets/logos/mvt_nbg.svg"
+              alt=""
+              style={{ boxShadow: "none" }}
+              height="50px"
+            />{" "}
+            &nbsp;
           </Nav.Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
